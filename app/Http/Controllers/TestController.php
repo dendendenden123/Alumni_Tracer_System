@@ -8,6 +8,6 @@ class TestController extends Controller
 {
     public function test()
     {
-        return view('auth.test');
+        return view('template.mazer.dist.index');
     }
 }
