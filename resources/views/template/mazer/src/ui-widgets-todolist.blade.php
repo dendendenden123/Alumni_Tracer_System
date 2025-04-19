@@ -13,7 +13,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Todo List</li>
                     </ol>
                 </nav>
@@ -76,7 +76,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-success me-1">frontend</div>
                                         <div class="avatar bg-warning">
-                                            <img src="assets/images/faces/1.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/1.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -97,7 +97,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-danger me-1">backend</div>
                                         <div class="avatar bg-warning">
-                                            <img src="assets/images/faces/2.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/2.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -118,7 +118,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-primary me-1">UI/UX</div>
                                         <div class="avatar bg-rgba-primary m-0 me-50">
-                                            <img src="assets/images/faces/3.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/3.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -139,7 +139,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-info me-1">Design</div>
                                         <div class="avatar bg-warning">
-                                            <img src="assets/images/faces/4.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/4.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -161,7 +161,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-warning me-1">Javascript</div>
                                         <div class="avatar bg-warning">
-                                            <img src="assets/images/faces/5.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/5.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -181,7 +181,7 @@
                                     <div class="widget-todo-item-action d-flex align-items-center">
                                         <div class="badge badge-pill badge-light-primary me-1">UI/UX</div>
                                         <div class="avatar bg-warning">
-                                            <img src="assets/images/faces/1.jpg" alt="" srcset="">
+                                            <img src="assets/images/faces/1.jpg" alt="" srcset=">
                                         </div>
                                         <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                                     </div>
@@ -260,7 +260,7 @@
 </div>
 {% endblock %}
 {% block styles %}
-<link rel="stylesheet" href="assets/vendors/dragula/dragula.min.css">
+<link rel="stylesheet" href="{{ asset('assets/vendors/dragula/dragula.min.css') }}">
 {% endblock %}
 {% block js %}
 <script src="assets/vendors/dragula/dragula.min.js"></script>

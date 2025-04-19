@@ -14,7 +14,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Select</li>
                     </ol>
                 </nav>
@@ -268,7 +268,7 @@
 {% endblock %}
 {% block stylesfirst %}
 <!-- Include Choices CSS -->
-<link rel="stylesheet" href="assets/vendors/choices.js/choices.min.css" />
+<link rel="stylesheet" href="{{ asset('assets/vendors/choices.js/choices.min.css') }}" />
 {% endblock %}
 {% block js %}
 <!-- Include Choices JavaScript -->

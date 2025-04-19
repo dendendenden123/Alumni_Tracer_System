@@ -13,7 +13,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Email Application</li>
                     </ol>
                 </nav>
@@ -45,7 +45,7 @@
 
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope') }}" />
                                         </svg>
                                         </i>
                                     </div>
@@ -58,7 +58,7 @@
 
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#archive" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#archive') }}" />
                                         </svg>
                                     </div>
                                     Sent
@@ -68,7 +68,7 @@
 
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#pencil" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#pencil') }}" />
                                         </svg>
                                     </div> Draft
                                 </a>
@@ -76,7 +76,7 @@
                                     <div class="fonticon-wrap d-inline me-3">
 
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                            <use xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                         </svg>
                                     </div>
                                     Starred
@@ -86,7 +86,7 @@
 
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#info-circle" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#info-circle') }}" />
                                         </svg>
                                     </div>
                                     Spam
@@ -97,7 +97,7 @@
                                     <div class="fonticon-wrap d-inline me-3">
                                         <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash') }}" />
                                         </svg>
                                     </div>
                                     Trash
@@ -155,11 +155,11 @@
                                     <div class="form-group pb-50">
                                         <label for="emailfrom">from</label>
                                         <input type="text" id="emailfrom" class="form-control"
-                                            placeholder="user@example.com" disabled="">
+                                            placeholder="user@example.com" disabled=">
                                     </div>
                                     <div class="form-label-group">
                                         <input type="email" id="emailTo" class="form-control" placeholder="To"
-                                            required="">
+                                            required=">
                                         <label for="emailTo">To</label>
                                     </div>
                                     <div class="form-label-group">
@@ -293,7 +293,7 @@
                                                         <svg class="bi" width="1.5em" height="1.5em"
                                                             fill="currentColor">
                                                             <use
-                                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash" />
+                                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash') }}" />
                                                         </svg>
                                                     </span>
                                                 </button>
@@ -305,7 +305,7 @@
                                                         <svg class="bi" width="1.5em" height="1.5em"
                                                             fill="currentColor">
                                                             <use
-                                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
+                                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope') }}" />
                                                         </svg>
                                                     </span>
                                                 </button>
@@ -321,7 +321,7 @@
                                                             <svg class="bi" width="1.5em" height="1.5em"
                                                                 fill="currentColor">
                                                                 <use
-                                                                    xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#folder" />
+                                                                    xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#folder') }}" />
                                                             </svg>
                                                         </span>
                                                     </button>
@@ -347,7 +347,7 @@
                                                             <svg class="bi" width="1.5em" height="1.5em"
                                                                 fill="currentColor">
                                                                 <use
-                                                                    xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#tag" />
+                                                                    xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#tag') }}" />
                                                             </svg>
                                                         </span>
                                                     </button>
@@ -394,7 +394,7 @@
                                                 <div class="form-control-icon">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#search" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#search') }}" />
                                                     </svg>
                                                 </div>
                                             </div>
@@ -404,13 +404,13 @@
                                         <button class="btn btn-icon email-pagination-prev d-none d-sm-block">
                                             <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                 <use
-                                                    xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-left" />
+                                                    xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-left') }}" />
                                             </svg>
                                         </button>
                                         <button class="btn btn-icon email-pagination-next d-none d-sm-block">
                                             <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                 <use
-                                                    xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-right" />
+                                                    xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-right') }}" />
                                             </svg>
                                         </button>
                                     </div>
@@ -432,7 +432,7 @@
                                                 <span class="favorite text-warning">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -478,7 +478,7 @@
                                                 <span class="favorite">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -526,7 +526,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -575,7 +575,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -625,7 +625,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -673,7 +673,7 @@
                                                 <span class="favorite text-warning">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -720,7 +720,7 @@
                                                 <span class="favorite text-warning">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -768,7 +768,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -817,7 +817,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -865,7 +865,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -915,7 +915,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -963,7 +963,7 @@
 
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star') }}" />
                                                     </svg>
                                                 </span>
                                             </div>
@@ -1046,7 +1046,7 @@
                                                 <span class="fonticon-wrap">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
+                                                            xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope') }}" />
                                                     </svg>
                                                 </span>
                                             </button>
@@ -1336,7 +1336,7 @@
                                                             <svg class="bi" width="1.5em" height="1.5em"
                                                                 fill="currentColor">
                                                                 <use
-                                                                    xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill" />
+                                                                    xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill') }}" />
                                                             </svg>
                                                         </span>
                                                         <div class="dropdown">
@@ -1512,5 +1512,5 @@
 </div>
 {% endblock %}
 {% block styles %}
-<link rel="stylesheet" href="assets/css/pages/email.css">
+<link rel="stylesheet" href="{{ asset('assets/css/pages/email.css') }}">
 {% endblock %}

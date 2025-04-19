@@ -13,7 +13,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Dripicons</li>
                     </ol>
                 </nav>
@@ -836,8 +836,8 @@
 </div>
 {% endblock %}
 {% block styles %}
-<link rel="stylesheet" href="assets/vendors/dripicons/webfont.css">
-<link rel="stylesheet" href="assets/css/pages/dripicons.css">
+<link rel="stylesheet" href="{{ asset('assets/vendors/dripicons/webfont.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/pages/dripicons.css') }}">
 {% endblock %}
 {% block js %}
 <script src="assets/vendors/fontawesome/all.min.js"></script>

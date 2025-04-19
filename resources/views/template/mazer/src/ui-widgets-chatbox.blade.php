@@ -13,7 +13,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Chatbox</li>
                     </ol>
                 </nav>
@@ -27,7 +27,7 @@
                     <div class="card-header">
                         <div class="media d-flex align-items-center">
                             <div class="avatar me-3">
-                                <img src="assets/images/faces/1.jpg" alt="" srcset="">
+                                <img src="assets/images/faces/1.jpg" alt="" srcset=">
                                 <span class="avatar-status bg-success"></span>
                             </div>
                             <div class="name flex-grow-1">
@@ -79,5 +79,5 @@
 </div>
 {% endblock %}
 {% block styles %}
-<link rel="stylesheet" href="assets/css/widgets/chat.css">
+<link rel="stylesheet" href="{{ asset('assets/css/widgets/chat.css') }}">
 {% endblock %}
