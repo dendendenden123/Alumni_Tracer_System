@@ -8,15 +8,15 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/quill/quill.bubble.css">
-    <link rel="stylesheet" href="assets/vendors/quill/quill.snow.css">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/quill/quill.bubble.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/quill/quill.snow.css') }}">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index""><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index"><img src="assets/images/logo/logo.png" alt="Logo" srcset="></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -51,46 +51,46 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert"">Alert</a>
+                                    <a href="component-alert">Alert</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge"">Badge</a>
+                                    <a href="component-badge">Badge</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-breadcrumb"">Breadcrumb</a>
+                                    <a href="component-breadcrumb">Breadcrumb</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-button"">Button</a>
+                                    <a href="component-button">Button</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-card"">Card</a>
+                                    <a href="component-card">Card</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-carousel"">Carousel</a>
+                                    <a href="component-carousel">Carousel</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-dropdown"">Dropdown</a>
+                                    <a href="component-dropdown">Dropdown</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-list-group"">List Group</a>
+                                    <a href="component-list-group">List Group</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-modal"">Modal</a>
+                                    <a href="component-modal">Modal</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-navs"">Navs</a>
+                                    <a href="component-navs">Navs</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-pagination"">Pagination</a>
+                                    <a href="component-pagination">Pagination</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-progress"">Progress</a>
+                                    <a href="component-progress">Progress</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-spinner"">Spinner</a>
+                                    <a href="component-spinner">Spinner</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-tooltip"">Tooltip</a>
+                                    <a href="component-tooltip">Tooltip</a>
                                 </li>
                             </ul>
                         </li>
@@ -102,19 +102,19 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="extra-component-avatar"">Avatar</a>
+                                    <a href="extra-component-avatar">Avatar</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert"">Sweet Alert</a>
+                                    <a href="extra-component-sweetalert">Sweet Alert</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-toastify"">Toastify</a>
+                                    <a href="extra-component-toastify">Toastify</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-rating"">Rating</a>
+                                    <a href="extra-component-rating">Rating</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-divider"">Divider</a>
+                                    <a href="extra-component-divider">Divider</a>
                                 </li>
                             </ul>
                         </li>
@@ -126,16 +126,16 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="layout-default"">Default Layout</a>
+                                    <a href="layout-default">Default Layout</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column"">1 Column</a>
+                                    <a href="layout-vertical-1-column">1 Column</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-vertical-navbar"">Vertical with Navbar</a>
+                                    <a href="layout-vertical-navbar">Vertical with Navbar</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="layout-horizontal"">Horizontal Menu</a>
+                                    <a href="layout-horizontal">Horizontal Menu</a>
                                 </li>
                             </ul>
                         </li>
@@ -149,22 +149,22 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-element-input"">Input</a>
+                                    <a href="form-element-input">Input</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-input-group"">Input Group</a>
+                                    <a href="form-element-input-group">Input Group</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-select"">Select</a>
+                                    <a href="form-element-select">Select</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-radio"">Radio</a>
+                                    <a href="form-element-radio">Radio</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-checkbox"">Checkbox</a>
+                                    <a href="form-element-checkbox">Checkbox</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-textarea"">Textarea</a>
+                                    <a href="form-element-textarea">Textarea</a>
                                 </li>
                             </ul>
                         </li>
@@ -183,16 +183,16 @@
                             </a>
                             <ul class="submenu active">
                                 <li class="submenu-item active">
-                                    <a href="form-editor-quill"">Quill</a>
+                                    <a href="form-editor-quill">Quill</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor"">CKEditor</a>
+                                    <a href="form-editor-ckeditor">CKEditor</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-summernote"">Summernote</a>
+                                    <a href="form-editor-summernote">Summernote</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-tinymce"">TinyMCE</a>
+                                    <a href="form-editor-tinymce">TinyMCE</a>
                                 </li>
                             </ul>
                         </li>
@@ -220,13 +220,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-chatbox"">Chatbox</a>
+                                    <a href="ui-widgets-chatbox">Chatbox</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-pricing"">Pricing</a>
+                                    <a href="ui-widgets-pricing">Pricing</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-todolist"">To-do List</a>
+                                    <a href="ui-widgets-todolist">To-do List</a>
                                 </li>
                             </ul>
                         </li>
@@ -238,13 +238,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-bootstrap-icons"">Bootstrap Icons </a>
+                                    <a href="ui-icons-bootstrap-icons">Bootstrap Icons </a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-fontawesome"">Fontawesome</a>
+                                    <a href="ui-icons-fontawesome">Fontawesome</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-dripicons"">Dripicons</a>
+                                    <a href="ui-icons-dripicons">Dripicons</a>
                                 </li>
                             </ul>
                         </li>
@@ -256,10 +256,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-chart-chartjs"">ChartJS</a>
+                                    <a href="ui-chart-chartjs">ChartJS</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-chart-apexcharts"">Apexcharts</a>
+                                    <a href="ui-chart-apexcharts">Apexcharts</a>
                                 </li>
                             </ul>
                         </li>
@@ -278,10 +278,10 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-map-google-map"">Google Map</a>
+                                    <a href="ui-map-google-map">Google Map</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-map-jsvectormap"">JS Vector Map</a>
+                                    <a href="ui-map-jsvectormap">JS Vector Map</a>
                                 </li>
                             </ul>
                         </li>
@@ -323,13 +323,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="auth-login"">Login</a>
+                                    <a href="login">Login</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="auth-register"">Register</a>
+                                    <a href="register">Register</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="auth-forgot-password"">Forgot Password</a>
+                                    <a href="forgot-password">Forgot Password</a>
                                 </li>
                             </ul>
                         </li>
@@ -341,13 +341,13 @@
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="error-403"">403</a>
+                                    <a href="error-403">403</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="error-404"">404</a>
+                                    <a href="error-404">404</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="error-500"">500</a>
+                                    <a href="error-500">500</a>
                                 </li>
                             </ul>
                         </li>
@@ -397,7 +397,7 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index"">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="index">Dashboard</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Form Editor</li>
                                 </ol>
                             </nav>

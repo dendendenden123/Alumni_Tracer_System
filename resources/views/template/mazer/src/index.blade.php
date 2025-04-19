@@ -4,7 +4,7 @@
 {% extends 'layouts/master.blade.php' %}
 
 {% block styles %}
-<link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+<link rel="stylesheet" href="{{ asset('assets/vendors/iconly/bold.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -109,7 +109,7 @@
                                         <svg class="bi text-primary" width="32" height="32" fill="blue"
                                             style="width:10px">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill') }}" />
                                         </svg>
                                         <h5 class="mb-0 ms-3">Europe</h5>
                                     </div>
@@ -127,7 +127,7 @@
                                         <svg class="bi text-success" width="32" height="32" fill="blue"
                                             style="width:10px">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill') }}" />
                                         </svg>
                                         <h5 class="mb-0 ms-3">America</h5>
                                     </div>
@@ -145,7 +145,7 @@
                                         <svg class="bi text-danger" width="32" height="32" fill="blue"
                                             style="width:10px">
                                             <use
-                                                xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill" />
+                                                xlink:href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.svg#circle-fill') }}" />
                                         </svg>
                                         <h5 class="mb-0 ms-3">Indonesia</h5>
                                     </div>
