@@ -4,16 +4,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
+use App\Mail\TestEmail;
+
+// Route::get('/', function () {
+//     return view('template.mazer.dist.index');
+// });
 
 Route::get('/', function () {
-    return view('template.mazer.dist.index');
+    return view('welcome');
 });
 
-Route::view('login', 'auth.login');
 Route::view('register', 'auth.register');
+Route::view('login', 'auth.login');
 Route::view('forgot-password', 'auth.forgot-password');
-
 Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::post('login', [AuthController::class, 'login'])->name('login');
+
+Route::get('/send-test-email', function () {
+    Mail::to('denvir733@gmail.com')->send(new TestEmail());
+    return 'Email sent!';
+});
+
 
 Route::get('{view}', function ($view) {
     $dist = 'template.mazer.dist.' . $view;
