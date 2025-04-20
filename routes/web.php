@@ -6,12 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Mail\TestEmail;
 
-// Route::get('/', function () {
-//     return view('template.mazer.dist.index');
-// });
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('template.mazer.dist.index');
 });
 
 Route::view('register', 'auth.register');
