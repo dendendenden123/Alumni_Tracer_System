@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mazer Admin Dashboard</title>
+    <title>Login - denvir Admin Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
@@ -54,6 +54,7 @@
                             </div>
                         @endif
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class="text-gray-600">Don't have an account? <a href="register""
@@ -69,8 +70,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
-
 </html>
