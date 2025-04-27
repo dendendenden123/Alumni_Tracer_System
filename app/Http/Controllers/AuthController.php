@@ -14,17 +14,20 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
          $request->validate([
-            'name' => 'required|string|max:255',
+            'full_name' => 'required|string',
+            'phone_number' => 'required|string',
+            'address' => 'required|string',
+            'dob' => 'required',
+            'degree' => 'required|string',
+            'graduation_year' => 'required|string',
+            'job_title' => 'required|string',
+            'company' => 'required|string',
+            'username' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:12',
+            'password' => 'required|confirmed',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'remember_token' => $request->_token,
-        ]);
+        $user = User::create($request->except('password_confirmation'));
 
         Auth::login($user);
         return redirect('login');
@@ -67,7 +70,9 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
-
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
             return redirect('/login'); // or wherever you want
     }
 
@@ -110,6 +115,7 @@ class AuthController extends Controller
     // This method checks if the code entered by the user matches the one stored in the session
     public function verifyMailConfirmation(Request $request)
     {
+
         $request->validate([
             'email' => 'required|email',
             'code' => 'required'

@@ -13,19 +13,11 @@ class AlumniOfficerController extends Controller
 {
 
     public function create(){
-        if (!Auth::check()) {
-            return redirect("login");
-        } 
 
         return view('template.denvir.dist.alumni-officer');
     }
     public function store(Request $request)
     {
-        if (!Auth::check()) {
-
-            return redirect("login");
-        } 
-
         $email = $request->input('email-id-column');
         $password = Str::random(8); // or whatever password generation you use
 

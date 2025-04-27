@@ -5,11 +5,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AlumniOfficerController;
-use App\Mail\EmailConfirmation;
 
-Route::get('/', function () {
-    return view('template.denvir.dist.index');
-});
+// Public routes
+Route::view('register', 'auth.register');
+Route::view('login', 'auth.login');
 
 // AuthController routes
 Route::controller(AuthController::class)->group(function () {
@@ -22,28 +21,35 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/email-Confirmation/verify', 'verifyMailConfirmation');
 });
 
-// AlumniOfficerController routes
-Route::controller(AlumniOfficerController::class)->group(function () {
-    Route::get('officer-create', 'create');
-    Route::post('/alumni-officer/store', 'store')->name('alumni-officer.store');
-});
+// Authenticated routes
+Route::middleware(['auth'])->group(function () {
 
-// View routes
-Route::view('register', 'auth.register');
-Route::view('login', 'auth.login');
-Route::view('alumnus', 'template.denvir.dist.alumnus-index');
-Route::view('officer', 'template.denvir.dist.alumni-officer');
+    // Dashboard route
+    Route::get('/', function () {
+        return view('template.denvir.dist.index');
+    });
 
-// Dynamic view route
-Route::get('{view}', function ($view) {
-    $dist = 'template.denvir.dist.' . $view;
-    $src = 'template.denvir.src.' . $view;
-   
-    if (view()->exists($dist)) {
-        return view($dist);
-    } elseif (view()->exists($src)) {
-        return view($src);    
-    } else {
-        abort(404);
-    }
+    // AlumniOfficerController routes
+    Route::controller(AlumniOfficerController::class)->group(function () {
+        Route::get('officer-create', 'create');
+        Route::post('/alumni-officer/store', 'store')->name('alumni-officer.store');
+    });
+
+    // Static view routes
+    Route::view('alumnus', 'template.denvir.dist.alumnus-index');
+    Route::view('officer', 'template.denvir.dist.alumni-officer');
+
+    // Dynamic view route
+    Route::get('{view}', function ($view) {
+        $dist = 'template.denvir.dist.' . $view;
+        $src = 'template.denvir.src.' . $view;
+
+        if (view()->exists($dist)) {
+            return view($dist);
+        } elseif (view()->exists($src)) {
+            return view($src);
+        } else {
+            abort(404);
+        }
+    });
 });

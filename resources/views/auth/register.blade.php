@@ -30,40 +30,8 @@
 
                     <form method="POST" action="{{ url('register') }}">
                         @csrf
-                        <!-- Email -->
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" name="email" id="email" class="form-control form-control-xl" placeholder="Email" required>
-                            <div class="form-control-icon">
-                                <i class="bi bi-envelope"></i>
-                            </div>
-                            <small id="email-status"></small>
-                        </div>
 
-                        <!-- Username -->
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="name" class="form-control form-control-xl" placeholder="Username" required>
-                            <div class="form-control-icon">
-                                <i class="bi bi-person"></i>
-                            </div>
-                        </div>
 
-                        <!-- Password -->
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password" required>
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                            <small id="password-status"></small>
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password_confirmation" id="confirm-password" class="form-control form-control-xl" placeholder="Confirm Password" required>
-                            <div class="form-control-icon">
-                                <i class="bi bi-shield-lock"></i>
-                            </div>
-                            <small id="confirm-password-status"></small>
-                        </div>
 
                         <!-- Full Name -->
                         <div class="form-group position-relative has-icon-left mb-4">
@@ -95,6 +63,73 @@
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
+                        </div>
+
+                        <!-- Degree -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="degree" class="form-control form-control-xl" placeholder="Degree" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+                        <!-- Graduation Year -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="number" name="graduation_year" class="form-control form-control-xl" placeholder="Graduation Year" min="1900" max="{{ date('Y') }}" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+                        <!-- Job Title -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="job_title" class="form-control form-control-xl" placeholder="Job Title" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+                         <!-- Company -->
+                         <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="company" class="form-control form-control-xl" placeholder="company" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="username" class="form-control form-control-xl" placeholder="Username" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="email" name="email" id="email" class="form-control form-control-xl" placeholder="Email" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <small id="email-status"></small>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <small id="password-status"></small>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="password" name="password_confirmation" id="confirm-password" class="form-control form-control-xl" placeholder="Confirm Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <small id="confirm-password-status"></small>
                         </div>
 
                         <!-- Validation Errors -->
