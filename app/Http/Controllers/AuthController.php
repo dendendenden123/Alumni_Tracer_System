@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EmailConfirmation;
 use App\Models\User;
+
 
 class AuthController extends Controller
 {
@@ -67,5 +70,61 @@ class AuthController extends Controller
 
             return redirect('/login'); // or wherever you want
     }
+
+    public function checkEmail(Request $request)
+    {
+        $email = $request->query('email');
+        $exists = User::where('email', $email)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
+    // Check if the password meets the strength criteria
+    public function checkPasswordStrength(Request $request)
+    {
+        $password = $request->query('password');
+        $strength = $this->checkPassword($password);  // Check the password strength
+        return response()->json(['strong' => $strength]);
+    }   
+
+    // Private method to validate the password strength
+    private function checkPassword($password)
+    {
+        return preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{12,}$/', $password);
+    }
+
+    public function sendMailConfirmation(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $email = $request->email;
     
+        // Generate a 6-digit random code
+        $code = rand(100000, 999999);
+    
+        // Store the code in the session
+        session(['email_verification_code_' . $email => $code]);
+    
+        // Send the email
+        Mail::to($email)->send(new EmailConfirmation($code));
+    
+        return response()->json(['success' => true]);
+    }
+
+    public function verifyMailConfirmation(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'code' => 'required'
+        ]);
+    
+        $sessionKey = 'email_verification_code_' . $request->email;
+        $storedCode = session($sessionKey);
+    
+        if ($storedCode && $storedCode == $request->code) {
+            session()->forget($sessionKey); // Optional: clear after use
+            return response()->json(['success' => true]);
+        }
+    
+        return response()->json(['success' => false, 'message' => 'Invalid or expired code.']);
+    }
 }
