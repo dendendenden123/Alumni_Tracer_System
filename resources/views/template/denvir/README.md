@@ -26,7 +26,7 @@ git clone https://github.com/zuramai/denvir
 - [CodeIgniter 4](https://github.com/irsyadulibad/denvir-codeigniter) by [@irsyadulibad](https://github.com/irsyadulibad)
 - [Laravel + Livewire](https://github.com/zuramai/laravel-denvir) by me
 - [NuxtJS](https://github.com/fauzan121002/denvir-nuxt) by [@fauzan121002](https://github.com/fauzan121002)
-- Did you make in another framework? [Contribute](https://github.com/zuramai/denvir/blob/main/CONTRIBUTING.md) or message me at [Twitter](https://twitter.com/amsaugi) 
+- Did you make in another framework? [Contribute](https://github.com/zuramai/denvir/blob/main/CONTRIBUTING.md) or message me at [Twitter](https://twitter.com/amDe Jesus) 
 
  ## Contributing
 
@@ -44,10 +44,10 @@ git clone https://github.com/zuramai/denvir
 denvir is under MIT License.
 
 ## About the Author
-denvir is created by <a href="https://ahmadsaugi.com">Saugi</a>. 
+denvir is created by <a href="#">De Jesus</a>. 
 
  ## Donate
- You can support me at [Ko-fi](https://ko-fi.com/saugi) or [Trakteer](https://trakteer.id/saugi)
+ You can support me at [Ko-fi](https://ko-fi.com/De Jesus) or [Trakteer](https://trakteer.id/De Jesus)
  
- <a href="https://buymeacoffee.com/saugi" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+ <a href="https://buymeacoffee.com/De Jesus" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
  
