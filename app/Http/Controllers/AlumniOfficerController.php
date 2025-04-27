@@ -12,9 +12,10 @@ use App\Mail\OfficerCredential;
 class AlumniOfficerController extends Controller
 {
 
-    public function create(){
+    public function index(){
 
         return view('template.denvir.dist.alumni-officer');
+        
     }
     public function store(Request $request)
     {

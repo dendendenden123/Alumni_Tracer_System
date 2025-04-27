@@ -657,6 +657,67 @@
                         </div>
                     </div>
                 </section>
+
+                <!-- table -->
+                <div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <p><h3>List of Users</h3> <h4> Admins, Alumni Officer, Alumnus</h4></p>
+                <p class="text-subtitle text-muted">For user to check they list</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+                <section class="section">
+        <div class="card">
+            <div class="card-header">
+                Simple Datatable
+            </div>
+            <div class="card-body">
+                <table class="table table-striped" id="table1">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>Role</th>
+                            <th>Graduation Year</th>
+                            <th>Job Title</th>
+                            <th>Company</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $user)
+                        <tr>
+                            <td>{{ $user->full_name }}</td>
+                            <td>{{ $user->role }}</td>
+                            <td>{{ $user->graduation_year }}</td>
+                            <td>{{ $user->job_title }}</td>
+                            <td>{{ $user->company }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                <span class="badge bg-success">Active</span>
+                            </td>
+                        </tr>
+                        @endforeach
+
+                    
+                    </tbody>
+                    <!-- {{ $users->links() }} -->
+                </table>
+            </div>
+        </div>
+
+    </section>
+                <!-- table -->
+
             </div>
 
             <footer>
@@ -666,7 +727,7 @@
                     </div>
                     <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="http://ahmadsaugi.com">A. Saugi</a></p>
+                                href="#">A. Saugi</a></p>
                     </div>
                 </div>
             </footer>
