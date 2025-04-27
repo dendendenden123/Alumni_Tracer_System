@@ -16,7 +16,6 @@ Route::get('/check-password-strength', [AuthController::class, 'checkPasswordStr
 
 Route::view('register', 'auth.register');
 Route::view('login', 'auth.login');
-Route::view('forgot-password', 'auth.forgot-pass`word');
 
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('login', [AuthController::class, 'login'])->name('login');

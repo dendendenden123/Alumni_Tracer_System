@@ -48,7 +48,7 @@ class AuthController extends Controller
             // Redirect based on role
             switch ($user->role) {
                 case 'Admin':
-                    return redirect("/");// or your route name
+                    return redirect("/");
                 case 'Officer':
                     return redirect("officer");
                 case 'Alumnus':
@@ -82,34 +82,32 @@ class AuthController extends Controller
     public function checkPasswordStrength(Request $request)
     {
         $password = $request->query('password');
-        $strength = $this->checkPassword($password);  // Check the password strength
+        $strength = $this->checkPassword($password);
         return response()->json(['strong' => $strength]);
     }   
 
     // Private method to validate the password strength
     private function checkPassword($password)
     {
-        return preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{12,}$/', $password);
+        return preg_match('/^(?=.*[A-Z])(?=.*\d).{12,}$/', $password);
     }
+    
 
+    // Send email confirmation code
+    // This method generates a random 6-digit code and sends it to the user's email
     public function sendMailConfirmation(Request $request)
     {
         $request->validate(['email' => 'required|email']);
-
         $email = $request->email;
-    
-        // Generate a 6-digit random code
         $code = rand(100000, 999999);
-    
-        // Store the code in the session
         session(['email_verification_code_' . $email => $code]);
-    
-        // Send the email
         Mail::to($email)->send(new EmailConfirmation($code));
     
         return response()->json(['success' => true]);
     }
 
+    // Verify the email confirmation code
+    // This method checks if the code entered by the user matches the one stored in the session
     public function verifyMailConfirmation(Request $request)
     {
         $request->validate([
