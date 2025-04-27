@@ -13,7 +13,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */ 
     public function index(){
-        $users = User::simplePaginate(10);
+        $users = User::simplePaginate(10); 
 
         return view('template.denvir.dist.index', compact('users'));
     }
