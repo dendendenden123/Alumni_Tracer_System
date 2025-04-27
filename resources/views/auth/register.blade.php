@@ -67,7 +67,7 @@
 
                         <!-- Full Name -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="full_name" class="form-control form-control-xl" placeholder="Full Name">
+                            <input type="text" name="full_name" class="form-control form-control-xl" placeholder="Full Name" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person-badge"></i>
                             </div>
@@ -75,7 +75,7 @@
 
                         <!-- Phone Number -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="phone_number" class="form-control form-control-xl" placeholder="Phone Number">
+                            <input type="number" name="phone_number" class="form-control form-control-xl" placeholder="Phone Number" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-phone"></i>
                             </div>
@@ -83,7 +83,7 @@
 
                         <!-- Address -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="address" class="form-control form-control-xl" placeholder="Address">
+                            <input type="text" name="address" class="form-control form-control-xl" placeholder="Address" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house-door"></i>
                             </div>
@@ -91,7 +91,7 @@
 
                         <!-- Date of Birth -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="date" name="dob" class="form-control form-control-xl" placeholder="Date of Birth">
+                            <input type="date" name="dob" class="form-control form-control-xl" placeholder="Date of Birth" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
@@ -109,7 +109,7 @@
                         @endif
 
                         <!-- Submit -->
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Sign Up</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5" id="submit-button">Sign Up</button>
                     </form>
 
                     <div class="text-center mt-5 text-lg fs-4">
@@ -125,144 +125,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script defer>
-        document.addEventListener('DOMContentLoaded', function () {
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirm-password');
-            const emailStatus = document.getElementById('email-status');
-            const passwordStatus = document.getElementById('password-status');
-            const confirmPasswordStatus = document.getElementById('confirm-password-status');
-            const form = document.querySelector('form');
-
-            function checkPasswordMatch() {
-                const password = passwordInput.value;
-                const confirmPassword = confirmPasswordInput.value;
-                if (!confirmPassword) {
-                    confirmPasswordStatus.textContent = '';
-                    return;
-                }
-                if (password === confirmPassword) {
-                    confirmPasswordStatus.textContent = 'Passwords match.';
-                    confirmPasswordStatus.style.color = 'green';
-                } else {
-                    confirmPasswordStatus.textContent = 'Passwords do not match.';
-                    confirmPasswordStatus.style.color = 'red';
-                }
-            }
-
-            passwordInput.addEventListener('input', checkPasswordMatch);
-            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
-
-            emailInput.addEventListener('input', async function () {
-                const email = emailInput.value;
-                if (email) {
-                    const res = await fetch(`/check-email?email=${encodeURIComponent(email)}`);
-                    const data = await res.json();
-                    emailStatus.textContent = data.exists ? 'This email is already taken.' : 'This email is available.';
-                    emailStatus.style.color = data.exists ? 'red' : 'green';
-                } else {
-                    emailStatus.textContent = '';
-                }
-            });
-
-            passwordInput.addEventListener('input', async function () {
-                const password = passwordInput.value;
-                if (password) {
-                    const res = await fetch(`/check-password-strength?password=${encodeURIComponent(password)}`);
-                    const data = await res.json();
-                    passwordStatus.textContent = data.strong ? 'Password is strong.' : 'Password is weak.';
-                    passwordStatus.style.color = data.strong ? 'green' : 'red';
-                } else {
-                    passwordStatus.textContent = '';
-                }
-            });
-
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
-
-                const formData = new FormData(form);
-                const email = formData.get('email');
-                const password = formData.get('password');
-
-                if (!email || !password) {
-                    Swal.fire('Error', 'Please complete all required fields.', 'error');
-                    return;
-                }
-
-                try {
-                    const emailResponse = await fetch('/email-Confirmation', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                            'Accept': 'application/json'
-                        },
-                        body: formData
-                    });
-
-                    const emailResult = await emailResponse.json();
-
-                    if (!emailResponse.ok || !emailResult.success) {
-                        throw new Error(emailResult.message || 'Failed to send verification code.');
-                    }
-
-                    const { value: verificationCode } = await Swal.fire({
-                        title: 'Email Verification',
-                        input: 'text',
-                        inputLabel: 'We sent a 6-digit code to your email.',
-                        inputPlaceholder: 'Enter code here',
-                        showCancelButton: true,
-                        confirmButtonText: 'Verify',
-                        inputValidator: (value) => !value && 'You must enter the verification code.'
-                    });
-
-                    if (!verificationCode) return;
-
-                    const verifyResponse = await fetch('/email-Confirmation/verify', {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({ email, code: verificationCode })
-                    });
-
-                    const verifyResult = await verifyResponse.json();
-
-                    if (verifyResult.success) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Verified!',
-                            text: 'Email verified successfully. Registering...',
-                            timer: 1500,
-                            showConfirmButton: false
-                        }).then(() => {
-                            const tempForm = document.createElement('form');
-                            tempForm.action = form.action;
-                            tempForm.method = form.method;
-
-                            for (const [key, value] of formData.entries()) {
-                                const input = document.createElement('input');
-                                input.type = 'hidden';
-                                input.name = key;
-                                input.value = value;
-                                tempForm.appendChild(input);
-                            }
-
-                            document.body.appendChild(tempForm);
-                            tempForm.submit();
-                        });
-                    } else {
-                        Swal.fire('Invalid Code', verifyResult.message || 'The verification code is incorrect.', 'error');
-                    }
-                } catch (error) {
-                    Swal.fire('Oops!', error.message || 'Something went wrong.', 'error');
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('assets/js/register.js') }}"></script>
 </body>
 </html>
