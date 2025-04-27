@@ -12,6 +12,15 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function loginView()
+    {
+        return view('auth.login');
+    }
+    public function registerView()
+    {
+        return view('auth.register');
+    }
+
     public function register(Request $request) {
          $request->validate([
             'full_name' => 'required|string',
@@ -115,7 +124,6 @@ class AuthController extends Controller
     // This method checks if the code entered by the user matches the one stored in the session
     public function verifyMailConfirmation(Request $request)
     {
-
         $request->validate([
             'email' => 'required|email',
             'code' => 'required'
