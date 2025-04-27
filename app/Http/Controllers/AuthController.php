@@ -9,12 +9,11 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailConfirmation;
 use App\Models\User;
 
+
 class AuthController extends Controller
 {
-    // Register a new user
-    public function register(Request $request)
-    {
-        $request->validate([
+    public function register(Request $request) {
+         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:12',
@@ -24,101 +23,106 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'remember_token' => $request->_token,
         ]);
 
         Auth::login($user);
         return redirect('login');
     }
 
-    // Login an existing user
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required',
             'password' => 'required',
         ]);
-
-        if (Auth::attempt($request->only('email', 'password'))) {
+    
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return $this->redirectBasedOnRole(Auth::user());
+    
+            // Get the authenticated user's role
+            $user = Auth::user();
+    
+            // Redirect based on role
+            switch ($user->role) {
+                case 'Admin':
+                    return redirect("/");
+                case 'Officer':
+                    return redirect("officer");
+                case 'Alumnus':
+                    return redirect("alumnus");
+                default:
+                    Auth::logout();
+                    return redirect('/login')->withErrors([
+                        'email' => 'Unauthorized role.',
+                    ]);
+            }
         }
-
-        return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');
+    
+        return back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ])->onlyInput('email');
     }
 
-    // Logout the user
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/login');
+    public function logout(Request $request){
+
+            return redirect('/login'); // or wherever you want
     }
 
-    // Check if an email exists in the database
     public function checkEmail(Request $request)
     {
-        $exists = User::where('email', $request->query('email'))->exists();
+        $email = $request->query('email');
+        $exists = User::where('email', $email)->exists();
         return response()->json(['exists' => $exists]);
     }
 
-    // Check if the password meets strength criteria
+    // Check if the password meets the strength criteria
     public function checkPasswordStrength(Request $request)
     {
-        $isStrong = $this->isPasswordStrong($request->query('password'));
-        return response()->json(['strong' => $isStrong]);
+        $password = $request->query('password');
+        $strength = $this->checkPassword($password);
+        return response()->json(['strong' => $strength]);
+    }   
+
+    // Private method to validate the password strength
+    private function checkPassword($password)
+    {
+        return preg_match('/^(?=.*[A-Z])(?=.*\d).{12,}$/', $password);
     }
+    
 
     // Send email confirmation code
+    // This method generates a random 6-digit code and sends it to the user's email
     public function sendMailConfirmation(Request $request)
     {
         $request->validate(['email' => 'required|email']);
-
+        $email = $request->email;
         $code = rand(100000, 999999);
-        session(['email_verification_code_' . $request->email => $code]);
-
-        Mail::to($request->email)->send(new EmailConfirmation($code));
+        session(['email_verification_code_' . $email => $code]);
+        Mail::to($email)->send(new EmailConfirmation($code));
+    
         return response()->json(['success' => true]);
     }
 
     // Verify the email confirmation code
+    // This method checks if the code entered by the user matches the one stored in the session
     public function verifyMailConfirmation(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
-            'code' => 'required',
+            'code' => 'required'
         ]);
-
+    
         $sessionKey = 'email_verification_code_' . $request->email;
         $storedCode = session($sessionKey);
-
+    
         if ($storedCode && $storedCode == $request->code) {
-            session()->forget($sessionKey);
+            session()->forget($sessionKey); // Optional: clear after use
             return response()->json(['success' => true]);
         }
-
+    
         return response()->json(['success' => false, 'message' => 'Invalid or expired code.']);
-    }
-
-    // Redirect user based on their role
-    private function redirectBasedOnRole($user)
-    {
-        switch ($user->role) {
-            case 'Admin':
-                return redirect('/');
-            case 'Officer':
-                return redirect('officer');
-            case 'Alumnus':
-                return redirect('alumnus');
-            default:
-                Auth::logout();
-                return redirect('/login')->withErrors(['email' => 'Unauthorized role.']);
-        }
-    }
-
-    // Validate password strength
-    private function isPasswordStrong($password)
-    {
-        return preg_match('/^(?=.*[A-Z])(?=.*\d).{12,}$/', $password);
     }
 }
