@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AlumniOfficerController;
-use App\Http\middlewares\IsLoggedIn;
+use App\Http\Controllers\UserController;
 
 
 // AuthController routes
@@ -22,22 +22,34 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Authenticated routes
-Route::middleware(['Auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
-    // Admin Dashboard route
+    // AlumniOfficerController routes
     Route::get('/', function () {
         return view('template.denvir.dist.index');
     });
 
+   // UserController routes
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('user/create', 'create');
+        Route::post('user/store', 'store')->name('user.store');
+        Route::get('user/edit/{id}', 'edit')->name('user.edit');
+        Route::post('user/update/{id}', 'update')->name('user.update');
+        Route::get('user/delete/{id}', 'destroy')->name('user.delete');
+    });
+
     // AlumniOfficerController routes
     Route::controller(AlumniOfficerController::class)->group(function () {
+        Route::get('alumni-officer/index', 'index');
         Route::get('officer-create', 'create');
         Route::post('/alumni-officer/store', 'store')->name('alumni-officer.store');
     });
 
-    // Static view routes
-    Route::view('alumnus', 'template.denvir.dist.alumnus-index');
-    Route::view('officer', 'template.denvir.dist.alumni-officer');
+    //AlumnusController routes
+    Route::controller(AlumnusController::class)->group(function () {
+        Route::get('alumnus/index', 'index');
+    });
 
     // Dynamic view route
     Route::get('{view}', function ($view) {
