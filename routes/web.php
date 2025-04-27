@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AlumniOfficerController;
+use App\Http\middlewares\IsLoggedIn;
 
-// Public routes
-Route::view('register', 'auth.register');
-Route::view('login', 'auth.login');
 
 // AuthController routes
 Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'loginView')->name('login');
+    Route::get('/register', 'registerView')->name('register');
     Route::get('/check-email', 'checkEmail');
     Route::get('/check-password-strength', 'checkPasswordStrength');
     Route::post('register', 'register')->name('register');
@@ -22,9 +22,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 // Authenticated routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['Auth'])->group(function () {
 
-    // Dashboard route
+    // Admin Dashboard route
     Route::get('/', function () {
         return view('template.denvir.dist.index');
     });
