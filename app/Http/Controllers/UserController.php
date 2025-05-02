@@ -17,4 +17,5 @@ class UserController extends Controller
 
         return view('template.denvir.dist.index', compact('users'));
     }
+    
 }
