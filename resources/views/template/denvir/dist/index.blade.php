@@ -703,7 +703,12 @@
                             <td>{{ $user->company }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                                <span class="badge bg-success">Active</span>
+                            <a href="#" title="Delete">
+                                <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
+                            </a>
+                                <a href="#" title="Edit">
+                                    <i class="bi bi-pencil-square" style="font-size: 20px; color: blue;"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -716,7 +721,7 @@
         </div>
 
     </section>
-                <!-- table -->
+                <!-- end table -->
 
             </div>
 
