@@ -37,7 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('user/store', 'store')->name('user.store');
         Route::get('user/edit/{id}', 'edit')->name('user.edit');
         Route::post('user/update/{id}', 'update')->name('user.update');
-        Route::get('user/delete/{id}', 'destroy')->name('user.delete');
+        Route::post('user/delete/{id}', 'destroy')->name('user.delete');
     });
 
     // AlumniOfficerController routes

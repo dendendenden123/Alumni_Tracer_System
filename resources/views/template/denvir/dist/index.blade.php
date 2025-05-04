@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/test.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -703,9 +705,12 @@
                             <td>{{ $user->company }}</td>
                             <td>{{ $user->email }}</td>
                             <td>
-                            <a href="#" title="Delete">
-                                <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
-                            </a>
+                            <form action="user/delete/{{ $user->id }}" class="delete-form" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" title="Delete" style="border: none; background: none; padding: 0;">
+                                    <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
+                                </button>
+                            </form>
                                 <a href="#" title="Edit">
                                     <i class="bi bi-pencil-square" style="font-size: 20px; color: blue;"></i>
                                 </a>
@@ -745,6 +750,52 @@
     <script src="assets/js/pages/dashboard.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            console.log('{{$authUser}}');
+            $('.delete-form').on('submit', function(e){
+                e.preventDefault();
+                localStorage.setItem('scrollPos', window.scrollY);
+
+                const url = "user/delete/12345"; // Replace with your actual URL
+                const matches = url.match(/\d+/g); // Finds all sequences of digits
+                const userId = matches ? matches[matches.length - 1] : null;
+
+                if (userId == {{$authUser}}) {
+                    alert("You cannot delete your own account.");
+                    return;
+                } 
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response){
+                        // Handle success response
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'User deleted successfully',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload();
+                            const scrollPos = localStorage.getItem('scrollPos');
+                            if (scrollPos) {
+                                window.scrollTo(0, parseInt(scrollPos));
+                                localStorage.removeItem('scrollPos'); // optional: clear after restoring
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error){
+                        // Handle error response
+                        alert('Error deleting user');
+                    }
+                });
+            })
+        })
+    </script>
+
 </body>
 
 </html>
