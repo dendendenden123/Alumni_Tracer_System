@@ -662,116 +662,122 @@
 
                 <!-- table -->
                 <div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <p><h3>List of Users</h3> <h4> Admins, Alumni Officer, Alumnus</h4></p>
-                <p class="text-subtitle text-muted">For user to check they list</p>
-            </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item active" aria-current="page">DataTable</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-                <section class="section">
-        <div class="card">
-            <div class="card-header">
-                Simple Datatable
-            </div>
-            <div class="card-body">
-                <table class="table table-striped" id="table1">
-                    <thead>
-                        <tr>
-                            <th>Full Name</th>
-                            <th>Role</th>
-                            <th>Graduation Year</th>
-                            <th>Job Title</th>
-                            <th>Company</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->full_name }}</td>
-                            <td>{{ $user->role }}</td>
-                            <td>{{ $user->graduation_year }}</td>
-                            <td>{{ $user->job_title }}</td>
-                            <td>{{ $user->company }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>
-                            <form action="user/delete/{{ $user->id }}" class="delete-form" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" title="Delete" style="border: none; background: none; padding: 0;">
-                                    <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
-                                </button>
-                            </form>
-                                <a href="#" title="Edit">
-                                    <i class="bi bi-pencil-square" style="font-size: 20px; color: blue;"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    
-                    </tbody>
-                    {{ $users->links() }}
-                </table>
-            </div>
-        </div>
-
-    </section>
-                <!-- end table -->
-
-            </div>
-
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; denvir</p>
+                    <div class="page-title">
+                        <div class="row">
+                            <div class="col-12 col-md-6 order-md-1 order-last">
+                                <p>
+                                <h3>List of Users</h3>
+                                <h4> Admins, Alumni Officer, Alumnus</h4>
+                                </p>
+                                <p class="text-subtitle text-muted">For user to check they list</p>
+                            </div>
+                            <div class="col-12 col-md-6 order-md-2 order-first">
+                                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-                    <div class="float-end">
-                        <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="#">D. De Jesus</a></p>
-                    </div>
+                    <section class="section">
+                        <div class="card">
+                            <div class="card-header">
+                                Simple Datatable
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-striped" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Full Name</th>
+                                            <th>Role</th>
+                                            <th>Graduation Year</th>
+                                            <th>Job Title</th>
+                                            <th>Company</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($users as $user)
+                                            <tr>
+                                                <td>{{ $user->full_name }}</td>
+                                                <td>{{ $user->role }}</td>
+                                                <td>{{ $user->graduation_year }}</td>
+                                                <td>{{ $user->job_title }}</td>
+                                                <td>{{ $user->company }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>
+                                                    <form action="user/delete/{{ $user->id }}" class="delete-form"
+                                                        method="POST" style="display: inline;">
+                                                        @csrf
+                                                        <button type="submit" title="Delete"
+                                                            style="border: none; background: none; padding: 0;">
+                                                            <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
+                                                        </button>
+                                                    </form>
+                                                    <a href="#" title="Edit">
+                                                        <i class="bi bi-pencil-square"
+                                                            style="font-size: 20px; color: blue;"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+
+                                    </tbody>
+                                    {{ $users->links() }}
+                                </table>
+                            </div>
+                        </div>
+
+                    </section>
+                    <!-- end table -->
+
                 </div>
-            </footer>
+
+                <footer>
+                    <div class="footer clearfix mb-0 text-muted">
+                        <div class="float-start">
+                            <p>2021 &copy; denvir</p>
+                        </div>
+                        <div class="float-end">
+                            <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
+                                    href="#">D. De Jesus</a></p>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
-    <script src="assets/js/pages/dashboard.js"></script>
+        <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+        <script src="assets/js/pages/dashboard.js"></script>
 
-    <script src="assets/js/main.js"></script>
-    <script>
-        $(document).ready(function(){
+        <script src="assets/js/main.js"></script>
+        <script>
 
-            console.log('{{$authUser}}');
-            $('.delete-form').on('submit', function(e){
-                e.preventDefault();
-                localStorage.setItem('scrollPos', window.scrollY);
 
-                const url = "user/delete/12345"; // Replace with your actual URL
-                const matches = url.match(/\d+/g); // Finds all sequences of digits
-                const userId = matches ? matches[matches.length - 1] : null;
 
-                if (userId == {{$authUser}}) {
-                    alert("You cannot delete your own account.");
-                    return;
-                } 
+            $(document).ready(function () {
+                $('.delete-form').on('submit', function (e) {
+                    e.preventDefault();
+                    localStorage.setItem('scrollPos', window.scrollY);
+                    const url = $(this).attr('action');
+                    const data = $(this).serialize();
+                    const matches = url.match(/\d+/g); // Finds all sequences of digits
+                    const userId = matches ? matches[matches.length - 1] : null;
+                    deleteUser(url, data);
+                });
+            });
 
+            function deleteUser(url, data) {
                 $.ajax({
-                    url: $(this).attr('action'),
+                    url: url,
                     type: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response){
+                    data: data,
+                    success: function (response) {
                         // Handle success response
                         Swal.fire({
                             title: 'Success!',
@@ -787,15 +793,13 @@
                             }
                         });
                     },
-                    error: function(xhr, status, error){
+                    error: function (xhr, status, error) {
                         // Handle error response
                         alert('Error deleting user');
                     }
                 });
-            })
-        })
-    </script>
-
+            }
+        </script>
 </body>
 
 </html>
