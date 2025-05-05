@@ -700,7 +700,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($users as $user)
-                                            <tr>
+                                            <tr id="{{ $user->id }}">
                                                 <td>{{ $user->full_name }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>{{ $user->graduation_year }}</td>
@@ -716,7 +716,7 @@
                                                             <i class="bi bi-trash" style="font-size: 20px; color: red;"></i>
                                                         </button>
                                                     </form>
-                                                    <a href="#" title="Edit">
+                                                    <a href="user/edit/{{ $user->id }}" title="Edit">
                                                         <i class="bi bi-pencil-square"
                                                             style="font-size: 20px; color: blue;"></i>
                                                     </a>
@@ -763,16 +763,15 @@
             $(document).ready(function () {
                 $('.delete-form').on('submit', function (e) {
                     e.preventDefault();
-                    localStorage.setItem('scrollPos', window.scrollY);
                     const url = $(this).attr('action');
                     const data = $(this).serialize();
                     const matches = url.match(/\d+/g); // Finds all sequences of digits
                     const userId = matches ? matches[matches.length - 1] : null;
-                    deleteUser(url, data);
+                    sendRequest(url, data, userId);//delete
                 });
             });
 
-            function deleteUser(url, data) {
+            function sendRequest(url, data, userId) {
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -785,17 +784,13 @@
                             icon: 'success',
                             confirmButtonText: 'OK'
                         }).then(() => {
-                            location.reload();
-                            const scrollPos = localStorage.getItem('scrollPos');
-                            if (scrollPos) {
-                                window.scrollTo(0, parseInt(scrollPos));
-                                localStorage.removeItem('scrollPos'); // optional: clear after restoring
-                            }
+                            // Remove tr that has an id of userId
+                            $(`tbody #${userId}`).remove();
                         });
                     },
                     error: function (xhr, status, error) {
                         // Handle error response
-                        alert('Error deleting user');
+                        alert('Error deleting user' + error);
                     }
                 });
             }

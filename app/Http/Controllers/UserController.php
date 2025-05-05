@@ -11,16 +11,18 @@ class UserController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */ 
-    public function index(){
-        $users = User::simplePaginate(10); 
+     */
+    public function index()
+    {
+        $users = User::simplePaginate(10);
         $authUser = auth()->id();//Logged in user
 
         return view('template.denvir.dist.index', compact('users', 'authUser'));
-        
+
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $user = User::find($id);
         if ($user) {
             $user->delete();
@@ -28,5 +30,11 @@ class UserController extends Controller
         } else {
             return response()->json(['success' => false, 'message' => 'User not found.']);
         }
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        dd("code idit");
     }
 }
