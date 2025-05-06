@@ -30,11 +30,9 @@ Route::middleware(['auth'])->group(function () {
         return view('template.denvir.dist.index');
     });
 
-   // UserController routes
+    // UserController routes
     Route::controller(UserController::class)->group(function () {
         Route::get('/', 'index');
-        Route::get('user/create', 'create');
-        Route::post('user/store', 'store')->name('user.store');
         Route::get('user/edit/{id}', 'edit')->name('user.edit');
         Route::post('user/update/{id}', 'update')->name('user.update');
         Route::post('user/delete/{id}', 'destroy')->name('user.delete');
@@ -42,8 +40,8 @@ Route::middleware(['auth'])->group(function () {
 
     // AlumniOfficerController routes
     Route::controller(AlumniOfficerController::class)->group(function () {
-        Route::get('alumni-officer/index', 'index');
-        Route::get('officer-create', 'create');
+        Route::get('/officer', 'index');
+        Route::get('/officer-create', 'create');
         Route::post('/alumni-officer/store', 'store')->name('alumni-officer.store');
     });
 
