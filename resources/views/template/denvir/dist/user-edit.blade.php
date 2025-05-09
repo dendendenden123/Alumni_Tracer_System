@@ -6,72 +6,77 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="user/update/{{ $user->id }}" method="POST">
+                            <form class="form" action="user/update/{{ $user->id }}" method="POST" class="update-form">
                                 @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="full-name-column">Full Name</label>
                                             <input type="text" id="full-name-column" class="form-control"
-                                                placeholder="Full Name" name="full_name">
+                                                placeholder="Full Name" name="full_name" value="{{ $user->full_name }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="phone-number-column">Phone Number</label>
-                                            <input type="number" id="phone-number-column" class="form-control"
-                                                placeholder="Phone Number" name="phone_number">
+                                            <input type="text" id="phone-number-column" class="form-control"
+                                                placeholder="Phone Number" name="phone_number"
+                                                value="{{ $user->phone_number }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="dob-year-column">Date of Birth</label>
-                                            <input type="number" id="dob-year-column" class="form-control"
-                                                placeholder="Year" name="dob" min="1900" max="2099" step="1">
+                                            <input type="text" id="dob-year-column" class="form-control"
+                                                placeholder="Year" name="dob" value="{{ $user->dob }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="address-floating">Address</label>
                                             <input type="text" id="address-floating" class="form-control" name="address"
-                                                placeholder="Address">
+                                                placeholder="Address" value="{{ $user->address }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="degree-column">Degree</label>
                                             <input type="text" id="degree-column" class="form-control" name="degree"
-                                                placeholder="Degree">
+                                                placeholder="Degree" value="{{ $user->degree }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="graduation-year-column">Graduation Year</label>
                                             <input type="number" id="graduation-year-column" class="form-control"
-                                                name="graduation_year" placeholder="Graduation Year">
+                                                name="graduation_year" placeholder="Graduation Year"
+                                                value="{{ $user->graduation_year }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="job-title-column">Job Title</label>
                                             <input type="text" id="job-title-column" class="form-control"
-                                                name="job_title" placeholder="Job Title">
+                                                name="job_title" placeholder="Job Title" value="{{ $user->job_title }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="company-column">Company</label>
                                             <input type="text" id="company-column" class="form-control" name="company"
-                                                placeholder="Company">
+                                                placeholder="Company" value="{{ $user->company }}">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="role-column">Role</label>
                                             <select id="role-column" class="form-control" name="role">
-                                                <option value="Admin">Admin</option>
-                                                <option value="Officer">Officer</option>
-                                                <option value="Alumnus">Alumnus</option>
+                                                <option value="Admin" {{ $user->role == 'Admin' ? 'selected' : '' }}>Admin
+                                                </option>
+                                                <option value="Officer" {{ $user->role == 'Officer' ? 'selected' : '' }}>
+                                                    Officer</option>
+                                                <option value="Alumnus" {{ $user->role == 'Alumnus' ? 'selected' : '' }}>
+                                                    Alumnus</option>
                                             </select>
                                         </div>
                                     </div>
@@ -79,27 +84,64 @@
                                         <div class="form-group">
                                             <label for="email-column">Email</label>
                                             <input type="email" id="email-column" class="form-control" name="email"
-                                                placeholder="Email">
+                                                placeholder="Email" value="{{ $user->email }}">
                                         </div>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <div class="form-check">
-                                            <div class="checkbox">
-                                                <input type="checkbox" id="checkbox5" class="form-check-input" checked>
-                                                <label for="checkbox5">Remember Me</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                     </div>
                                 </div>
                             </form>
+                            <div class="form-group col-12">
+                                <div class="form-check">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox5" class="form-check-input" checked>
+                                        <label for="checkbox5">Remember Me</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                            </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </section>
+
+    <script>
+        $(document).ready(function () {
+            $('.update-form').on('submit', function (e) {
+                e.preventDefault();
+                const url = $(this).attr('action');
+                const data = $(this).serialize();
+                sendRequest(url, data);//update
+            });
+        });
+
+        function sendRequest(url, data) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    // Handle success response
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'User Updated successfully',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        // Redirect to the user list page or perform any other action
+                        window.location.href = "/";
+                    });
+                },
+                error: function (xhr, status, error) {
+                    // Handle error response
+                    alert('Error deleting user' + error);
+                }
+            });
+        }
+    </script>
 </x-defaultLayout>
