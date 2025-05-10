@@ -42,8 +42,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->update($request->all());
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return response()->json(['success' => true, 'message' => 'User updated successfully.']);
     }
 }
