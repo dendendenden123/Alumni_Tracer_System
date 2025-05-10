@@ -6,8 +6,9 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action="user/update/{{ $user->id }}" method="POST" class="update-form">
+                            <form method="POST" class="updateForm">
                                 @csrf
+                                @method('POST')
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -98,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                <button type="submit" class="btn btn-primary me-1 mb-1 submit">Submit</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                             </div>
                         </div>
@@ -112,36 +113,31 @@
 
     <script>
         $(document).ready(function () {
-            $('.update-form').on('submit', function (e) {
+            $('.submit').on('click', function (e) {
                 e.preventDefault();
-                const url = $(this).attr('action');
-                const data = $(this).serialize();
-                sendRequest(url, data);//update
+                $.ajax({
+                    url: "/user/update/{{ $user->id }}",
+                    type: 'POST',
+                    data: $(".updateForm").serialize(),
+                    success: function (response) {
+                        // Handle success response
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'User Updated successfully',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            // Redirect to the user list page or perform any other action
+                            window.location.href = "/";
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error response
+                        alert('Error deleting user ' + error);
+                    }
+                });
             });
         });
 
-        function sendRequest(url, data) {
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: data,
-                success: function (response) {
-                    // Handle success response
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'User Updated successfully',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        // Redirect to the user list page or perform any other action
-                        window.location.href = "/";
-                    });
-                },
-                error: function (xhr, status, error) {
-                    // Handle error response
-                    alert('Error deleting user' + error);
-                }
-            });
-        }
     </script>
 </x-defaultLayout>
