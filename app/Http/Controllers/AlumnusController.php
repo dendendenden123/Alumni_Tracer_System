@@ -10,4 +10,9 @@ class AlumnusController extends Controller
     {
         return view('template.denvir.dist.alumnus-index');
     }
+
+    public function show()
+    {
+        return view("template.denvir.dist.alumnus-profile");
+    }
 }

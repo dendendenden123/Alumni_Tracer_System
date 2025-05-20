@@ -4,52 +4,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Application - denvir Admin Dashboard</title>
-    
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
-    
-    <link rel="stylesheet" href="{{ asset('assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg') }}" type="image/x-icon">
+    <title>Modern Newsfeed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
-<div class="page-heading">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Layout Default</h3>
-                <p class="text-subtitle text-muted">ALUMNUS INDEX PAGE </p>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:w-64 lg:w-80 bg-white border-r border-gray-200 flex-col">
+            <div class="p-4">
+                <h1 class="text-2xl font-bold text-indigo-600">Alumni Tracer</h1>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">
-                            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">LOG OUT</button>
-                            </form>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Layout Default</li>
-                    </ol>
-                </nav>
+            <nav class="flex-1 px-2 space-y-2">
+                <a href="#"
+                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
+                    <i class="fas fa-home mr-3"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#"
+                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
+                    <i class="fas fa-user-friends mr-3"></i>
+                    <span>Friends</span>
+                </a>
+                <a href="#"
+                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
+                    <i class="fas fa-bell mr-3"></i>
+                    <span>Notifications</span>
+                </a>
+                <a href="#"
+                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
+                    <i class="fas fa-envelope mr-3"></i>
+                    <span>Messages</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                        class="w-10 h-10 rounded-full">
+                    <div class="ml-3">
+                        <p class="font-medium">Sarah Johnson</p>
+                        <p class="text-sm text-gray-500">@sarahj</p>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white border-b border-gray-200 py-3 px-4 flex items-center justify-between">
+                <div class="flex items-center md:hidden">
+                    <button class="mr-4">
+                        <i class="fas fa-bars text-gray-600"></i>
+                    </button>
+                    <h1 class="text-xl font-bold text-indigo-600">Alumni Tracer</h1>
+                </div>
+                <div class="relative w-full max-w-xl mx-4">
+                    <input type="text" placeholder="Search..."
+                        class="w-full bg-gray-100 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:bg-white">
+                    <i class="fas fa-search absolute left-3 top-2.5 text-gray-400"></i>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-plus text-gray-600"></i>
+                    </button>
+                    <button class="p-2 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <a href="alumnus/profle">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                            class="w-8 h-8 rounded-full">
+                    </a>
+                </div>
+            </header>
+
+            <!-- Newsfeed Content -->
+            <main class="flex-1 overflow-y-auto p-4 md:p-6">
+                <!-- Create Post -->
+                <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                            class="w-10 h-10 rounded-full">
+                        <input type="text" placeholder="Post a testimony..."
+                            class="flex-1 bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:bg-white">
+                        <button type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Publish</button>
+                    </div>
+                    <div class="flex justify-between border-t border-gray-100 pt-3">
+                        <button
+                            class="flex items-center justify-center flex-1 text-gray-500 hover:bg-gray-50 py-2 rounded-lg">
+                            <i class="fas fa-video text-red-500 mr-2"></i>
+                            <span>Live Video</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center flex-1 text-gray-500 hover:bg-gray-50 py-2 rounded-lg">
+                            <i class="fas fa-images text-green-500 mr-2"></i>
+                            <span>Photo/Video</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center flex-1 text-gray-500 hover:bg-gray-50 py-2 rounded-lg">
+                            <i class="fas fa-smile text-yellow-500 mr-2"></i>
+                            <span>Feeling/Activity</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Posts -->
+                <div class="space-y-6">
+                    <!-- Post 1 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <!-- Post Header -->
+                        <div class="p-4 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-medium">Michael Chen</p>
+                                    <p class="text-xs text-gray-500">2 hrs ago · <i class="fas fa-globe-americas"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+
+                        <!-- Post Content -->
+                        <div class="px-4 pb-3">
+                            <p class="mb-3">Just finished hiking the Pacific Crest Trail! 2,650 miles of breathtaking
+                                views and unforgettable experiences. 🏔️ #PCT #Adventure</p>
+                            <div class="rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                    alt="Post image" class="w-full h-auto">
+                            </div>
+                        </div>
+
+                        <!-- Post Stats -->
+                        <div
+                            class="px-4 py-2 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+                            <div class="flex items-center space-x-2">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-5 h-5 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                    <div
+                                        class="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-white text-xs -ml-1.5">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                </div>
+                                <span>248</span>
+                            </div>
+                            <div>
+                                <span>24 comments · 5 shares</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Actions -->
+                        <div class="px-4 py-2 border-t border-gray-100 grid grid-cols-3">
+                            <button
+                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
+                                <i class="far fa-comment"></i>
+                                <span>Comment</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
+                                <i class="fas fa-share"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Post 2 -->
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <!-- Post Header -->
+                        <div class="p-4 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Profile"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-medium">Jessica Park</p>
+                                    <p class="text-xs text-gray-500">Yesterday at 4:20 PM · <i
+                                            class="fas fa-user-friends"></i></p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+
+                        <!-- Post Content -->
+                        <div class="px-4 pb-3">
+                            <p class="mb-3">Our team just launched version 3.0 of our product! 🚀 So proud of everyone
+                                who contributed to this milestone. Check it out and let us know what you think!</p>
+                            <div class="border border-gray-200 rounded-lg p-3 bg-gray-50">
+                                <div class="flex">
+                                    <div
+                                        class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center text-white">
+                                        <i class="fas fa-box-open text-2xl"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="font-medium">Product Name 3.0</p>
+                                        <p class="text-sm text-gray-500">productwebsite.com</p>
+                                        <p class="text-sm mt-1">The latest version of our product with new features and
+                                            improvements.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Stats and Actions (same as above) -->
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-    <section class="section">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">ALUMNUS INDEX PAGE</h4>
-            </div>
-            <div class="card-body">
-            <h2>Welcome to the Alumnus!</h2>
-            This page serves as a comprehensive listing of our esteemed alumni who have journeyed through our institution and gone on to achieve great things. Whether you're reconnecting with old friends, networking with fellow professionals, or simply browsing through our proud history, this directory is your gateway to the past, present, and future of our alumni community. We celebrate their accomplishments and invite you to stay connected, inspired, and engaged.
-            </div>
-        </div>
-    </section>
-</div>
 </body>
+
 </html>
