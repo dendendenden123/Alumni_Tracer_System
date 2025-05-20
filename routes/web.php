@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
     //AlumnusController routes
     Route::controller(AlumnusController::class)->group(function () {
         Route::get('alumnus', 'index');
+        Route::get('alumnus/profle', 'show');
     });
 
     // Dynamic view route
