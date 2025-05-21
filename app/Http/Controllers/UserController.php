@@ -44,4 +44,17 @@ class UserController extends Controller
         $user->update($request->all());
         return response()->json(['success' => true, 'message' => 'User updated successfully.']);
     }
+
+    public function updateProfilePicture(Request $request)
+    {
+        // Validate the image
+        $request->validate([
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        // Store the image in storage/app/public/images
+        $path = $request->file('profile_picture')->store('images', 'public');
+
+        dd("scuess");
+    }
 }

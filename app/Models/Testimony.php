@@ -10,6 +10,8 @@ class Testimony extends Model
     /** @use HasFactory<\Database\Factories\TestimonyFactory> */
     use HasFactory;
 
+    public $guarded = [];
+
     public function user()
     {
         return $this->belongsTo(User::class);

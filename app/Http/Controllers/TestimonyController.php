@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Testimony;
-use App\Http\Requests\StoreTestimonyRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateTestimonyRequest;
+use App\Models\User;
+
 
 class TestimonyController extends Controller
 {
@@ -13,7 +15,8 @@ class TestimonyController extends Controller
      */
     public function index()
     {
-        //
+        $testimonies = Testimony::with('user')->orderByDesc('created_at')->get();
+        return view('template\denvir\dist\alumnus-index', compact('testimonies'));
     }
 
     /**
@@ -27,9 +30,19 @@ class TestimonyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTestimonyRequest $request)
+    public function store(Request $request)
     {
-        dd("code is here");
+        $validated = $request->validate([
+            'testimony' => 'required|string',
+        ]);
+
+        Testimony::create([
+            "user_id" => auth()->id(),
+            "content" => $validated["testimony"],
+            "rating" => 0
+        ]);
+
+        return redirect("alumnus");
     }
 
     /**

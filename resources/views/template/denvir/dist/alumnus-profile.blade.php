@@ -23,10 +23,11 @@
             <div class="flex items-center space-x-8">
                 <h1 class="text-2xl font-bold text-indigo-600">AlumniConnect</h1>
                 <nav class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/alumnus" class="text-gray-700 hover:text-indigo-600">Home</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Network</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Jobs</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Events</a>
+                    <a href="/logout" class="text-gray-700 hover:text-indigo-600">Log out</a>
                 </nav>
             </div>
             <div class="flex items-center space-x-4">
@@ -57,9 +58,16 @@
                         <div class="relative">
                             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
                                 class="w-32 h-32 rounded-full border-4 border-white">
-                            <button class="absolute bottom-2 right-2 bg-indigo-600 text-white p-1.5 rounded-full">
-                                <i class="fas fa-camera text-xs"></i>
-                            </button>
+                            <form id="profile-pic-form" method="POST" action="/Update-Profile-Picture"
+                                enctype="multipart/form-data" class="absolute bottom-2 right-2">
+                                @csrf
+                                <input type="file" id="profile-pic-input" name="profile_picture" accept="image/*"
+                                    class="hidden" onchange="document.getElementById('profile-pic-form').submit()">
+                                <button type="button" class="bg-indigo-600 text-white p-1.5 rounded-full"
+                                    onclick="document.getElementById('profile-pic-input').click()">
+                                    <i class="fas fa-camera text-xs"></i>
+                                </button>
+                            </form>
                         </div>
                         <div class="mb-4">
                             <h2 class="text-2xl font-bold">Sarah Johnson</h2>
