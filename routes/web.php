@@ -18,7 +18,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/check-password-strength', 'checkPasswordStrength');
     Route::post('register', 'register')->name('register');
     Route::post('login', 'login')->name('login');
-    Route::post('logout', 'logout')->name('logout');
+    Route::get('logout', 'logout')->name('logout');
     Route::post('/email-Confirmation', 'sendMailConfirmation');
     Route::post('/email-Confirmation/verify', 'verifyMailConfirmation');
 });
@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('user/edit/{id}', 'edit')->name('user.edit');
         Route::post('user/update/{id}', 'update')->name('user.update');
         Route::post('user/delete/{id}', 'destroy')->name('user.delete');
+        Route::post('/Update-Profile-Picture', 'updateProfilePicture');
     });
 
     // AlumniOfficerController routes
@@ -54,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
     //TestimonyController routes
     Route::controller(TestimonyController::class)->group(function () {
+        Route::get('alumnus', 'index');
         Route::post('testimony/store', 'store');
     });
 
