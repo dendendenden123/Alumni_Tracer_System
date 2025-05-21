@@ -34,7 +34,8 @@
                 <button class="p-2 rounded-full hover:bg-gray-100">
                     <i class="fas fa-bell text-gray-600"></i>
                 </button>
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-8 h-8 rounded-full">
+                <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
+                    class="w-8 h-8 rounded-full">
             </div>
         </div>
     </header>
@@ -70,8 +71,10 @@
                             </form>
                         </div>
                         <div class="mb-4">
-                            <h2 class="text-2xl font-bold">Sarah Johnson</h2>
-                            <p class="text-gray-600">Class of 2015 · Computer Science</p>
+                            <h2 class="text-2xl font-bold">{{ auth()->user()->full_name }}</h2>
+                            <p class="text-gray-600">Class of {{ auth()->user()->graduation_year }} ·
+                                {{ auth()->user()->degree }}
+                            </p>
                         </div>
                     </div>
                     <div class="flex space-x-3 mt-4 md:mt-0">
@@ -99,7 +102,7 @@
                         <p class="text-sm text-gray-500">Following</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-2xl font-bold text-indigo-600">2015</p>
+                        <p class="text-2xl font-bold text-indigo-600">{{ auth()->user()->graduation_year }}</p>
                         <p class="text-sm text-gray-500">Graduation Year</p>
                     </div>
                 </div>
@@ -120,27 +123,31 @@
                     <div class="space-y-4">
                         <div>
                             <p class="text-sm text-gray-500">Bio</p>
-                            <p class="mt-1">Senior Software Engineer at TechCorp with 8+ years of experience in
+                            <p class="mt-1">{{ auth()->user()->job_title }} at {{ auth()->user()->company }} with
+                                {{ now()->year - auth()->user()->graduation_year }}
+                                years of experience in
                                 full-stack development. Passionate about mentoring new developers and contributing to
-                                open source projects.</p>
+                                open source projects.
+                            </p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Current Position</p>
-                            <p class="mt-1 font-medium">Senior Software Engineer at TechCorp</p>
+                            <p class="mt-1 font-medium">{{ auth()->user()->job_title }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Education</p>
-                            <p class="mt-1 font-medium">B.Sc. Computer Science - University of Technology (2011-2015)
+                            <p class="mt-1 font-medium">{{ auth()->user()->degree }} - University of Technology
+                                ({{ auth()->user()->graduation_year }})
                             </p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Location</p>
-                            <p class="mt-1 font-medium">San Francisco, California</p>
+                            <p class="mt-1 font-medium">{{ auth()->user()->address }}</p>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Contact</p>
-                            <p class="mt-1 font-medium">sarah.johnson@example.com</p>
-                            <p class="mt-1 font-medium">(555) 123-4567</p>
+                            <p class="mt-1 font-medium">{{ auth()->user()->email }}</p>
+                            <p class="mt-1 font-medium">{{ auth()->user()->phone_number }}</p>
                         </div>
                     </div>
                 </div>
