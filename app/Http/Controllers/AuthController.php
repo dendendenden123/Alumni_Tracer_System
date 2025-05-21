@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EmailConfirmation;
 use App\Models\User;
@@ -21,8 +20,9 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request) {
-         $request->validate([
+    public function register(Request $request)
+    {
+        $request->validate([
             'full_name' => 'required|string',
             'phone_number' => 'required|string',
             'address' => 'required|string',
@@ -48,15 +48,15 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-    
+
         $credentials = $request->only('email', 'password');
-    
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-    
+
             // Get the authenticated user's role
             $user = Auth::user();
-    
+
             // Redirect based on role
             switch ($user->role) {
                 case 'Admin':
@@ -72,17 +72,18 @@ class AuthController extends Controller
                     ]);
             }
         }
-    
+
         return back()->withErrors([
             'email' => 'Invalid credentials.',
         ])->onlyInput('email');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-            return redirect('/login'); // or wherever you want
+        return redirect('/login'); // or wherever you want
     }
 
     public function checkEmail(Request $request)
@@ -98,14 +99,14 @@ class AuthController extends Controller
         $password = $request->query('password');
         $strength = $this->checkPassword($password);
         return response()->json(['strong' => $strength]);
-    }   
+    }
 
     // Private method to validate the password strength
     private function checkPassword($password)
     {
         return preg_match('/^(?=.*[A-Z])(?=.*\d).{12,}$/', $password);
     }
-    
+
 
     // Send email confirmation code
     // This method generates a random 6-digit code and sends it to the user's email
@@ -116,7 +117,7 @@ class AuthController extends Controller
         $code = rand(100000, 999999);
         session(['email_verification_code_' . $email => $code]);
         Mail::to($email)->send(new EmailConfirmation($code));
-    
+
         return response()->json(['success' => true]);
     }
 
@@ -128,15 +129,15 @@ class AuthController extends Controller
             'email' => 'required|email',
             'code' => 'required'
         ]);
-    
+
         $sessionKey = 'email_verification_code_' . $request->email;
         $storedCode = session($sessionKey);
-    
+
         if ($storedCode && $storedCode == $request->code) {
             session()->forget($sessionKey); // Optional: clear after use
             return response()->json(['success' => true]);
         }
-    
+
         return response()->json(['success' => false, 'message' => 'Invalid or expired code.']);
     }
 }
