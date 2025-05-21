@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AlumniOfficerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumnusController;
+use App\Http\Controllers\TestimonyController;
 
 
 // AuthController routes
@@ -49,6 +50,11 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(AlumnusController::class)->group(function () {
         Route::get('alumnus', 'index');
         Route::get('alumnus/profle', 'show');
+    });
+
+    //TestimonyController routes
+    Route::controller(TestimonyController::class)->group(function () {
+        Route::post('testimony/store', 'store');
     });
 
     // Dynamic view route

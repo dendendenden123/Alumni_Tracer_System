@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Denvir Admin Dashboard</title>
-    
+
     <!-- Fonts & Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
@@ -35,7 +35,8 @@
 
                         <!-- Full Name -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="full_name" class="form-control form-control-xl" placeholder="Full Name" required>
+                            <input type="text" name="full_name" class="form-control form-control-xl"
+                                placeholder="Full Name" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person-badge"></i>
                             </div>
@@ -43,7 +44,8 @@
 
                         <!-- Phone Number -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="number" name="phone_number" class="form-control form-control-xl" placeholder="Phone Number" required>
+                            <input type="number" name="phone_number" class="form-control form-control-xl"
+                                placeholder="Phone Number" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-phone"></i>
                             </div>
@@ -51,7 +53,8 @@
 
                         <!-- Address -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="address" class="form-control form-control-xl" placeholder="Address" required>
+                            <input type="text" name="address" class="form-control form-control-xl" placeholder="Address"
+                                required>
                             <div class="form-control-icon">
                                 <i class="bi bi-house-door"></i>
                             </div>
@@ -59,7 +62,8 @@
 
                         <!-- Date of Birth -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="date" name="dob" class="form-control form-control-xl" placeholder="Date of Birth" required>
+                            <input type="date" name="dob" class="form-control form-control-xl"
+                                placeholder="Date of Birth" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
@@ -67,7 +71,8 @@
 
                         <!-- Degree -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="degree" class="form-control form-control-xl" placeholder="Degree" required>
+                            <input type="text" name="degree" class="form-control form-control-xl" placeholder="Degree"
+                                required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
@@ -75,7 +80,8 @@
 
                         <!-- Graduation Year -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="number" name="graduation_year" class="form-control form-control-xl" placeholder="Graduation Year" min="1900" max="{{ date('Y') }}" required>
+                            <input type="number" name="graduation_year" class="form-control form-control-xl"
+                                placeholder="Graduation Year" min="1900" max="{{ date('Y') }}" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
@@ -83,15 +89,17 @@
 
                         <!-- Job Title -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="job_title" class="form-control form-control-xl" placeholder="Job Title" required>
+                            <input type="text" name="job_title" class="form-control form-control-xl"
+                                placeholder="Job Title" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
                         </div>
 
-                         <!-- Company -->
-                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="company" class="form-control form-control-xl" placeholder="company" required>
+                        <!-- Company -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" name="company" class="form-control form-control-xl" placeholder="company"
+                                required>
                             <div class="form-control-icon">
                                 <i class="bi bi-calendar"></i>
                             </div>
@@ -99,7 +107,8 @@
 
                         <!-- Username -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" name="username" class="form-control form-control-xl" placeholder="Username" required>
+                            <input type="text" name="username" class="form-control form-control-xl"
+                                placeholder="Username" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>
@@ -107,7 +116,8 @@
 
                         <!-- Email -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="email" name="email" id="email" class="form-control form-control-xl" placeholder="Email" required>
+                            <input type="email" name="email" id="email" class="form-control form-control-xl"
+                                placeholder="Email" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-envelope"></i>
                             </div>
@@ -116,7 +126,8 @@
 
                         <!-- Password -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password" id="password" class="form-control form-control-xl" placeholder="Password" required>
+                            <input type="password" name="password" id="password" class="form-control form-control-xl"
+                                placeholder="Password" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
@@ -125,7 +136,8 @@
 
                         <!-- Confirm Password -->
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="password" name="password_confirmation" id="confirm-password" class="form-control form-control-xl" placeholder="Confirm Password" required>
+                            <input type="password" name="password_confirmation" id="confirm-password"
+                                class="form-control form-control-xl" placeholder="Confirm Password" required>
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
@@ -144,11 +156,12 @@
                         @endif
 
                         <!-- Submit -->
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5" id="submit-button">Sign Up</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5"
+                            id="submit-button">Sign Up</button>
                     </form>
 
                     <div class="text-center mt-5 text-lg fs-4">
-                        <p class="text-gray-600">Already have an account? 
+                        <p class="text-gray-600">Already have an account?
                             <a href="{{ url('login') }}" class="font-bold">Log in</a>.
                         </p>
                     </div>
@@ -162,4 +175,5 @@
     </div>
     <script src="{{ asset('assets/js/register.js') }}"></script>
 </body>
+
 </html>

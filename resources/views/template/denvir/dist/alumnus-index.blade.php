@@ -86,11 +86,15 @@
                     <div class="flex items-center space-x-3 mb-4">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
                             class="w-10 h-10 rounded-full">
-                        <input type="text" placeholder="Post a testimony..."
-                            class="flex-1 bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:bg-white">
-                        <button type="button"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            Publish</button>
+                        <form method="post" action="testimony/store">
+                            @crsf
+                            <input type="text" placeholder="Post a testimony..."
+                                class="flex-1 bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:bg-white">
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Publish</button>
+                        </form>
+
                     </div>
                     <div class="flex justify-between border-t border-gray-100 pt-3">
                         <button
