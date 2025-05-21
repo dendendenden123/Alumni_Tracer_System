@@ -37,10 +37,15 @@
                     <i class="fas fa-envelope mr-3"></i>
                     <span>Messages</span>
                 </a>
+                <a href="logout"
+                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    <span>Log Out</span>
+                </a>
             </nav>
             <div class="p-4 border-t border-gray-200">
                 <div class="flex items-center">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                    <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
                         class="w-10 h-10 rounded-full">
                     <div class="ml-3">
                         <p class="font-medium">Sarah Johnson</p>
@@ -73,7 +78,7 @@
                         <i class="fas fa-bell text-gray-600"></i>
                     </button>
                     <a href="alumnus/profle">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                        <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
                             class="w-8 h-8 rounded-full">
                     </a>
                 </div>
@@ -85,7 +90,7 @@
                 <form method="post" action="testimony/store">
                     <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
                         <div class="flex items-center space-x-3 mb-4">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                            <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
                                 class="w-10 h-10 rounded-full">
 
                             @csrf
@@ -126,7 +131,7 @@
                     <!-- Post Header -->
                     <div class="p-4 flex items-center justify-between">
                         <div class="flex items-center space-x-3">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile"
+                            <img src="{{ asset('storage/images/' . $testimony->user->profilePicture) }}" alt="Profile"
                                 class="w-10 h-10 rounded-full">
                             <div>
                                 <p class="font-medium">{{ $testimony->user->full_name }}</p>
