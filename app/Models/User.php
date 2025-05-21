@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Testimony::class);
     }
+
+
+    public function jobHistory()
+    {
+        return $this->hasMany(JobHistory::class);
+    }
 }
