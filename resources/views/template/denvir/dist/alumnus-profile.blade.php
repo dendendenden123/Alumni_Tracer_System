@@ -56,7 +56,7 @@
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between">
                     <div class="flex items-end -mt-16 space-x-4">
                         <div class="relative">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile"
+                            <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
                                 class="w-32 h-32 rounded-full border-4 border-white">
                             <form id="profile-pic-form" method="POST" action="/Update-Profile-Picture"
                                 enctype="multipart/form-data" class="absolute bottom-2 right-2">

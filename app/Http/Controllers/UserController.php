@@ -52,9 +52,25 @@ class UserController extends Controller
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Store the image in storage/app/public/images
-        $path = $request->file('profile_picture')->store('images', 'public');
+        // Rename the image by the auth()->user()->full_name
+        $user = auth()->user();
+        $extension = $request->file('profile_picture')->getClientOriginalExtension();
+        $fileName = preg_replace('/\s+/', '_', strtolower($user->full_name)) . '.' . $extension;
 
-        dd("scuess");
+        // Check first if the $fileName exists in the path, if so, replace the old one
+        $filePath = storage_path('app/public/images/' . $fileName);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        //Image save to app/public/images/
+        $request->file('profile_picture')->storeAs('images', $fileName, 'public');
+
+        //update profile in database
+        User::where('id', $user->id)->update([
+            "profilePicture" => $fileName,
+        ]);
+
+        return redirect("/alumnus/profle");
     }
 }
