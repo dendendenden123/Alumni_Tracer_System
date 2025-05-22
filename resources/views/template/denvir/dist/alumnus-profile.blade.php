@@ -7,6 +7,7 @@
     <title>Alumni Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .progress-ring__circle {
             transition: stroke-dashoffset 0.5s;
@@ -24,6 +25,7 @@
                 <h1 class="text-2xl font-bold text-indigo-600">AlumniConnect</h1>
                 <nav class="hidden md:flex space-x-6">
                     <a href="/alumnus" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/donate" class="text-gray-700 hover:text-indigo-600">Donate</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Network</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Jobs</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Events</a>
@@ -204,41 +206,30 @@
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold">Experience</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800">
+                        <button onclick="showForm()" class="text-indigo-600 hover:text-indigo-800">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
                     <div class="space-y-6">
-                        <div class="flex">
-                            <div class="mr-4">
-                                <div
-                                    class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-briefcase"></i>
+
+                        @foreach ($alumnus->jobHistory as $job)
+                            <div class="flex">
+                                <div class="mr-4">
+                                    <div
+                                        class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium">{{ $job->position }}</p>
+                                    <p class="text-sm text-gray-500">{{ $job->company }}</p>
+                                    <p class="text-sm text-gray-500">{{ $job->start_month }} {{ $job->start_year }} -
+                                        {{ $job->end_month }} {{ $job->end_year }}
+                                    </p>
+                                    <p class="text-sm mt-2">{{ $job->description }}</p>
                                 </div>
                             </div>
-                            <div class="flex-1">
-                                <p class="font-medium">Senior Software Engineer</p>
-                                <p class="text-sm text-gray-500">TechCorp</p>
-                                <p class="text-sm text-gray-500">Jan 2020 - Present · 3 yrs 6 mos</p>
-                                <p class="text-sm mt-2">Lead a team of 5 developers building scalable web applications.
-                                    Architected migration from monolithic to microservices.</p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="mr-4">
-                                <div
-                                    class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-briefcase"></i>
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium">Software Engineer</p>
-                                <p class="text-sm text-gray-500">InnovateSoft</p>
-                                <p class="text-sm text-gray-500">Jun 2015 - Dec 2019 · 4 yrs 7 mos</p>
-                                <p class="text-sm mt-2">Full-stack development of enterprise SaaS products. Promoted
-                                    from Junior to Mid-level within 2 years.</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -398,5 +389,151 @@
         </div>
     </main>
 </body>
+<script>
+    function showForm() {
+        Swal.fire({
+            title: 'Add Job History',
+            html: `
+                <form id="itemForm" class="text-left">
+                    @csrf
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Company Name</label>
+                        <input type="text" name="company" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Position</label>
+                        <input type="text" name="position" class="w-full px-3 py-2 border rounded" required>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Description</label>
+                        <textarea name="description" class="w-full px-3 py-2 border rounded" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Start Date</label>
+                        <div class="flex space-x-2">
+                            <select name="start_month" class="w-1/2 px-3 py-2 border rounded" required>
+                                <option value="">Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            <input type="number" name="start_year" class="w-1/2 px-3 py-2 border rounded" placeholder="Year" min="1900" max="2100" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">End Date</label>
+                        <div class="flex space-x-2">
+                            <select name="end_month" class="w-1/2 px-3 py-2 border rounded">
+                                <option value="">Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                            <input type="number" name="end_year" class="w-1/2 px-3 py-2 border rounded" placeholder="Year" min="1900" max="2100">
+                        </div>
+                        <div class="mt-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" name="currently_working" class="mr-2" id="currentJobCheckbox">
+                                <span class="text-gray-700">I currently work here</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            `,
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Cancel',
+            preConfirm: () => {
+                const form = document.getElementById('itemForm');
+                const formData = new FormData(form);
+
+                // Validate required fields
+                if (!formData.get('company')) {
+                    Swal.showValidationMessage('Company name is required');
+                    return false;
+                }
+                if (!formData.get('position')) {
+                    Swal.showValidationMessage('Position is required');
+                    return false;
+                }
+                if (!formData.get('start_month') || !formData.get('start_year')) {
+                    Swal.showValidationMessage('Start date is required');
+                    return false;
+                }
+
+                return formData;
+            },
+            didOpen: () => {
+                // Make end date fields optional if "currently working" is checked
+                document.getElementById('currentJobCheckbox').addEventListener('change', function (e) {
+                    const endMonth = document.querySelector('select[name="end_month"]');
+                    const endYear = document.querySelector('input[name="end_year"]');
+
+                    if (e.target.checked) {
+                        endMonth.disabled = true;
+                        endYear.disabled = true;
+                        endMonth.value = '';
+                        endYear.value = '';
+                    } else {
+                        endMonth.disabled = false;
+                        endYear.disabled = false;
+                    }
+                });
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Process form submission
+                fetch('/jobHistory-store', {
+                    method: 'POST',
+                    body: new FormData(document.getElementById('itemForm')),
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log(data.message)
+                            Swal.fire('Success!', 'Job history added successfully', 'success')
+                                .then(() => {
+                                    window.location.reload(); // Reload page or update UI
+                                });
+                        } else {
+                            console.log(data.error);
+                            Swal.fire('Error', data.message || 'Failed to add job history', 'error');
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire('Error', 'An error occurred while submitting the form', 'error');
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    }
+</script>
 
 </html>

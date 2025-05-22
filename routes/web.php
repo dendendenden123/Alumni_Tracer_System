@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\JobHistoryController;
+use App\Models\JobHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -8,6 +10,8 @@ use App\Http\Controllers\AlumniOfficerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumnusController;
 use App\Http\Controllers\TestimonyController;
+use App\Http\Controllers\DonationController;
+
 
 
 // AuthController routes
@@ -57,6 +61,16 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(TestimonyController::class)->group(function () {
         Route::get('alumnus', 'index');
         Route::post('testimony/store', 'store');
+    });
+
+    //JobHistoryController routes
+    Route::controller(JobHistoryController::class)->group(function () {
+        Route::post('/jobHistory-store', 'store');
+    });
+
+    //DonationController routes
+    Route::controller(DonationController::class)->group(function () {
+        Route::post('/donation-store', 'store');
     });
 
     // Dynamic view route

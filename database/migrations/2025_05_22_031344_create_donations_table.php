@@ -10,16 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('job_histories', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('position');
-            $table->string('company');
-            $table->string('description');
-            $table->string('start_month');
-            $table->string('end_month');
-            $table->string('start_year');
-            $table->string('end_year');
+            $table->float('amount', 2)->default(0.00);
+            $table->string('payment_method')->default('gcash');
+            $table->string('payment_screenshot');
+            $table->string('purpose');
+            $table->string('is_Verify')->default('false');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_histories');
+        Schema::dropIfExists('donations');
     }
 };
