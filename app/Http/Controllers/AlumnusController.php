@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AlumnusController extends Controller
 {
@@ -13,6 +14,9 @@ class AlumnusController extends Controller
 
     public function show()
     {
-        return view("template.denvir.dist.alumnus-profile");
+        $alumnus = User::with(['jobHistory', 'testimony'])
+            ->where('id', auth()->id())
+            ->first();
+        return view("template.denvir.dist.alumnus-profile", compact("alumnus"));
     }
 }
