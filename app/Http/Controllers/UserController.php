@@ -73,4 +73,18 @@ class UserController extends Controller
 
         return redirect("/alumnus/profle");
     }
+
+    public function privacySetting()
+    {
+        try {
+            User::where('id', auth()->user()->id)->update([
+                "donation_Visibility" => request('donation_Visibility'),
+                "testimonial_Visibility" => request('testimonial_Visibility'),
+                "job_Visibility" => request('job_Visibility'),
+            ]);
+            return response()->json(['success' => true, 'message' => '']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e]);
+        }
+    }
 }
