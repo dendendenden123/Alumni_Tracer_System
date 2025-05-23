@@ -14,7 +14,7 @@ class AlumnusController extends Controller
 
     public function show()
     {
-        $alumnus = User::with(['jobHistory', 'testimony'])
+        $alumnus = User::with(['jobHistory', 'testimony', "donation"])
             ->where('id', auth()->id())
             ->first();
         return view("template.denvir.dist.alumnus-profile", compact("alumnus"));

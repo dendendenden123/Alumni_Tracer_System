@@ -92,16 +92,19 @@
                 <!-- Profile Stats -->
                 <div class="mt-6 pt-6 border-t border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="text-center">
-                        <p class="text-2xl font-bold text-indigo-600">248</p>
-                        <p class="text-sm text-gray-500">Connections</p>
+                        <p class="text-2xl font-bold text-indigo-600">
+                            &#8369;{{ $alumnus->donation->where('is_Verify', "true")->sum('amount') }}</p>
+                        <p class="text-sm text-gray-500">Total amount donated</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-2xl font-bold text-indigo-600">24</p>
-                        <p class="text-sm text-gray-500">Posts</p>
+                        <p class="text-2xl font-bold text-indigo-600">
+                            {{ $alumnus->donation->where('is_Verify', "false")->count() }}
+                        </p>
+                        <p class="text-sm text-gray-500">Pending donation Transaction</p>
                     </div>
                     <div class="text-center">
-                        <p class="text-2xl font-bold text-indigo-600">56</p>
-                        <p class="text-sm text-gray-500">Following</p>
+                        <p class="text-2xl font-bold text-indigo-600">{{ $alumnus->testimony->count() }}</p>
+                        <p class="text-sm text-gray-500">Testimonies</p>
                     </div>
                     <div class="text-center">
                         <p class="text-2xl font-bold text-indigo-600">{{ auth()->user()->graduation_year }}</p>
@@ -155,22 +158,8 @@
                 </div>
 
                 <!-- Skills -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Skills</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">JavaScript</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">React</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Node.js</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Python</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">AWS</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Docker</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm">Kubernetes</span>
-                    </div>
+                <div>
+
                 </div>
 
                 <!-- Education -->
@@ -236,38 +225,16 @@
                 <!-- Projects -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Projects</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800">
-                            <i class="fas fa-plus"></i>
-                        </button>
+                        <h3 class="text-lg font-bold">Your Testimonies</h3>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition-colors">
-                            <div
-                                class="w-full h-32 bg-gradient-to-r from-blue-400 to-indigo-500 rounded mb-3 flex items-center justify-center text-white">
-                                <i class="fas fa-project-diagram text-3xl"></i>
+                    @foreach ($alumnus->testimony->sortByDesc('created_at') as $testimony)
+                        <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition-colors">
+                                <p class="font-medium">{{ $testimony->content }}</p>
+                                <p class="text-sm text-gray-500 mt-1">{{ $testimony->created_at->diffForHumans() }}</p>
                             </div>
-                            <p class="font-medium">Alumni Portal</p>
-                            <p class="text-sm text-gray-500 mt-1">A networking platform for university alumni</p>
-                            <div class="mt-3 flex flex-wrap gap-1">
-                                <span class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs">React</span>
-                                <span class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs">Laravel</span>
-                                <span class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs">MySQL</span>
-                            </div>
-                        </div>
-                        <div class="border border-gray-200 rounded-lg p-4 hover:border-indigo-300 transition-colors">
-                            <div
-                                class="w-full h-32 bg-gradient-to-r from-purple-400 to-pink-500 rounded mb-3 flex items-center justify-center text-white">
-                                <i class="fas fa-mobile-alt text-3xl"></i>
-                            </div>
-                            <p class="font-medium">Task Manager App</p>
-                            <p class="text-sm text-gray-500 mt-1">Mobile application for personal productivity</p>
-                            <div class="mt-3 flex flex-wrap gap-1">
-                                <span class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs">Flutter</span>
-                                <span class="bg-gray-100 text-gray-800 px-2 py-0.5 rounded-full text-xs">Firebase</span>
-                            </div>
-                        </div>
-                    </div>
+                        </div> <br>
+                    @endforeach
                 </div>
             </div>
 
@@ -276,7 +243,7 @@
                 <!-- Alumni Badges -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Alumni Badges</h3>
+                        <h3 class="text-lg font-bold">Privacy Setting</h3>
                     </div>
                     <div class="grid grid-cols-3 gap-4">
                         <div class="flex flex-col items-center">
