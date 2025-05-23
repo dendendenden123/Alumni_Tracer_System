@@ -108,7 +108,7 @@
                             <label class="block text-gray-700 mb-2 font-medium">Upload Payment Screenshot</label>
                             <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                                 <input type="file" name="payment_screenshot" id="screenshotUpload" accept="image/*"
-                                    capture="environment" class="hidden">
+                                    capture="environment" class="hidden" required>
                                 <label for="screenshotUpload" class="cursor-pointer">
                                     <i class="fas fa-camera text-3xl text-gray-400 mb-2"></i>
                                     <p class="text-gray-500">Click to upload or take photo</p>
@@ -185,11 +185,11 @@
                 success: function (response) {
                     Swal.fire({
                         title: 'Thank You!',
-                        text: 'Your donation proof has been submitted successfully.',
+                        text: 'Your donation proof has been submitted successfully. Please wait for verification before it is reflected on your dashboard.',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        window.location.href = '/thank-you';
+                        window.location.href = '/alumnus/profle';
                     });
                 },
                 error: function (xhr) {

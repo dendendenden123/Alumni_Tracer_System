@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobHistory::class);
     }
+
+    public function donation()
+    {
+        return $this->hasMany(Donation::class);
+    }
 }
