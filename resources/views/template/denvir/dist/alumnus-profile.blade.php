@@ -24,7 +24,7 @@
             <div class="flex items-center space-x-8">
                 <h1 class="text-2xl font-bold text-indigo-600">AlumniConnect</h1>
                 <nav class="hidden md:flex space-x-6">
-                    <a href="/alumnus" class="text-gray-700 hover:text-indigo-600">Home</a>
+                    <a href="/alumnus" class="text-gray-700 hover:text-indigo-600">Testimonies</a>
                     <a href="/donate" class="text-gray-700 hover:text-indigo-600">Donate</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Network</a>
                     <a href="#" class="text-gray-700 hover:text-indigo-600">Jobs</a>
@@ -93,7 +93,8 @@
                 <div class="mt-6 pt-6 border-t border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="text-center">
                         <p class="text-2xl font-bold text-indigo-600">
-                            &#8369;{{ $alumnus->donation->where('is_Verify', "true")->sum('amount') }}</p>
+                            {{  $alumnus->donation->where('is_Verify', "true")->sum('amount')}}
+                        </p>
                         <p class="text-sm text-gray-500">Total amount donated</p>
                     </div>
                     <div class="text-center">
@@ -245,113 +246,131 @@
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold">Privacy Setting</h3>
                     </div>
-                    <div class="grid grid-cols-3 gap-4">
-                        <div class="flex flex-col items-center">
-                            <div
-                                class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-500 mb-2">
-                                <i class="fas fa-trophy text-2xl"></i>
+                    <form method="POST" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+                        @csrf
+                        <div class="space-y-6">
+                            <!-- Header -->
+                            <div class="flex items-center space-x-3 border-b pb-4">
+                                <div class="p-2 bg-blue-100 rounded-lg">
+                                    <!-- Replace with your actual logo -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                    </svg>
+                                </div>
+                                <h2 class="text-xl font-bold text-gray-800">Profile Visibility Settings</h2>
                             </div>
-                            <p class="text-xs text-center">Top Contributor</p>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div
-                                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-500 mb-2">
-                                <i class="fas fa-hands-helping text-2xl"></i>
+
+                            <!-- Toggle Items -->
+                            <div class="space-y-5">
+                                <!-- Donation Visibility -->
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-700">Donation History</h3>
+                                        <p class="text-sm text-gray-500">Who can see your donation records</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" name="donation_Visibility" value="1"
+                                            class="sr-only peer">
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                        </div>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 hidden peer-checked:inline">Public</span>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 peer-checked:hidden">Private</span>
+                                    </label>
+                                </div>
+
+                                <!-- Testimony Visibility -->
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-700">Testimonials</h3>
+                                        <p class="text-sm text-gray-500">Who can see your testimonials</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" name="testimonial_Visibility" value="1"
+                                            class="sr-only peer">
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                        </div>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 hidden peer-checked:inline">Public</span>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 peer-checked:hidden">Private</span>
+                                    </label>
+                                </div>
+
+                                <!-- Job History Visibility -->
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-700">Job History</h3>
+                                        <p class="text-sm text-gray-500">Who can see your employment history</p>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" name="job_Visibility'" value="1" class="sr-only peer">
+                                        <div
+                                            class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
+                                        </div>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 hidden peer-checked:inline">Public</span>
+                                        <span
+                                            class="ml-3 text-sm font-medium text-gray-700 peer-checked:hidden">Private</span>
+                                    </label>
+                                </div>
                             </div>
-                            <p class="text-xs text-center">Mentor</p>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div
-                                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-2">
-                                <i class="fas fa-calendar-check text-2xl"></i>
+
+                            <!-- Save Button -->
+                            <div class="pt-4 border-t">
+                                <button type="submit" id="save-visibility-settings"
+                                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
+                                    Save Visibility Settings
+                                </button>
                             </div>
-                            <p class="text-xs text-center">Event Organizer</p>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <!-- Alumni Activity -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Alumni Activity</h3>
+                        <h3 class="text-lg font-bold">Donation Transaction</h3>
                         <button class="text-indigo-600 hover:text-indigo-800">
                             <i class="fas fa-ellipsis-h"></i>
                         </button>
                     </div>
                     <div class="space-y-4">
-                        <div class="flex items-start">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <p class="font-medium">Michael Chen</p>
-                                <p class="text-sm text-gray-500">Commented on your post · 2h ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="User"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <p class="font-medium">Emily Rodriguez</p>
-                                <p class="text-sm text-gray-500">Reacted to your post · 5h ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User"
-                                class="w-10 h-10 rounded-full mr-3">
-                            <div>
-                                <p class="font-medium">David Kim</p>
-                                <p class="text-sm text-gray-500">Shared your post · 1d ago</p>
-                            </div>
-                        </div>
+                        @foreach ($alumnus->donation->sortByDesc('updated_at') as $donation)
+
+                            @if ($donation->is_Verify == "true")
+                                <div class="flex items-start">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/6711/6711626.png" alt="User"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium">Your donation of ₱{{ $donation->amount }} has been successfully
+                                            verified. Thank you
+                                            for your generous support!</p>
+                                        <p class="text-sm text-gray-500">{{ $donation->updated_at->diffForHumans() }}</p>
+                                    </div>
+                                </div>
+                            @elseif ($donation->is_Verify == "false")
+                                <div class="flex items-start">
+                                    <img src="https://cdn-icons-png.flaticon.com/128/2618/2618524.png" alt="User"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium">Your donation has been deposited and is awaiting verification. We
+                                            will notify you once the process is complete</p>
+                                        <p class="text-sm text-gray-500">{{ $donation->updated_at->diffForHumans() }}</p>
+                                    </div>
+                                </div>
+                            @endif
+
+                        @endforeach
                     </div>
-                    <button class="w-full mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                        See all activity
-                    </button>
                 </div>
 
-                <!-- Alumni Events -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Upcoming Events</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex">
-                            <div class="mr-4">
-                                <div
-                                    class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-500">
-                                    <i class="fas fa-calendar-day"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium">Annual Alumni Meet</p>
-                                <p class="text-sm text-gray-500">June 15, 2023 · 6:00 PM</p>
-                                <p class="text-sm text-gray-500">University Campus</p>
-                                <button class="mt-2 text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                                    RSVP
-                                </button>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="mr-4">
-                                <div
-                                    class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-500">
-                                    <i class="fas fa-chalkboard-teacher"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium">Career Workshop</p>
-                                <p class="text-sm text-gray-500">July 5, 2023 · 4:00 PM</p>
-                                <p class="text-sm text-gray-500">Online</p>
-                                <button class="mt-2 text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </main>
@@ -501,6 +520,11 @@
             }
         });
     }
+
+    $('#save-visibility-settings').on('click', function () {
+        alert('click.');
+    });
+
 </script>
 
 </html>
