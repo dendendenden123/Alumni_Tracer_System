@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('user/update/{id}', 'update')->name('user.update');
         Route::post('user/delete/{id}', 'destroy')->name('user.delete');
         Route::post('/Update-Profile-Picture', 'updateProfilePicture');
+        Route::post('/privacy-settings', 'privacySetting');
     });
 
     // AlumniOfficerController routes
@@ -54,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
     //AlumnusController routes
     Route::controller(AlumnusController::class)->group(function () {
         Route::get('alumnus', 'index');
+        Route::get('/profile/{id}', 'showOtherProfile');
         Route::get('alumnus/profle', 'show');
     });
 

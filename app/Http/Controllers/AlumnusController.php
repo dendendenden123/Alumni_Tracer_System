@@ -19,4 +19,18 @@ class AlumnusController extends Controller
             ->first();
         return view("template.denvir.dist.alumnus-profile", compact("alumnus"));
     }
+
+    public function showOtherProfile(Request $request, $id)
+    {
+        if (auth()->user()->id == $id) {
+            return redirect("/alumnus/profle");
+        }
+        $user = User::findOrFail($id);
+        $alumnus = User::with(['jobHistory', 'testimony', "donation"])
+            ->where('id', $id)
+            ->first();
+
+
+        return view('template.denvir.dist.alumnus-other-profile', compact('user', 'alumnus'));
+    }
 }
