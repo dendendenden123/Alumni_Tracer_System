@@ -73,6 +73,8 @@ Route::middleware(['auth'])->group(function () {
     //DonationController routes
     Route::controller(DonationController::class)->group(function () {
         Route::post('/donation-store', 'store');
+        Route::get('/alumni-officer/Manage_donation', 'index');
+        Route::post('/alumni-officer/update_donation/{id}', 'update');
     });
 
     // Dynamic view route

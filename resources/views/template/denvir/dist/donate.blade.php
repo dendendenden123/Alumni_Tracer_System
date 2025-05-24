@@ -193,6 +193,7 @@
                     });
                 },
                 error: function (xhr) {
+                    console.log(response.message)
                     let errorMsg = 'There was a problem submitting your proof.';
                     if (xhr.responseJSON && xhr.responseJSON.error) {
                         errorMsg = xhr.responseJSON.error;
