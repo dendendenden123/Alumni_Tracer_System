@@ -126,61 +126,63 @@
 
             @foreach ($testimonies as $testimony)
 
-
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                    <!-- Post Header -->
-                    <div class="p-4 flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <img src="{{ asset('storage/images/' . $testimony->user->profilePicture) }}" alt="Profile"
-                                class="w-10 h-10 rounded-full">
-                            <div>
-                                <p class="font-medium">{{ $testimony->user->full_name }}</p>
-                                <p class="text-xs text-gray-500">{{ $testimony->created_at->diffForHumans() }} · <i
-                                        class="fas fa-globe-americas"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <button class="text-gray-400 hover:text-gray-600">
-                            Class of {{ $testimony->user->graduation_year }}
-                        </button>
-                    </div>
-
-                    <!-- Post Content -->
-                    <div class="px-4 pb-3">
-                        <p class="mb-3">{{ $testimony->content }}</p>
-                    </div>
-
-                    <!-- Post Stats -->
-                    <div class="px-4 py-2 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-                        <div class="flex items-center space-x-2">
-                            <div class="flex items-center">
-                                <div
-                                    class="w-5 h-5 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
-                                    <i class="fas fa-thumbs-up"></i>
+                @if ($testimony->user->id == auth()->user()->id || $testimony->user->testimonial_Visibility == "1")
+                    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                        <!-- Post Header -->
+                        <div class="p-4 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <img src="{{ asset('storage/images/' . $testimony->user->profilePicture) }}" alt="Profile"
+                                    class="w-10 h-10 rounded-full">
+                                <div>
+                                    <a href="/profile/{{ $testimony->user->id }}"
+                                        class="font-medium">{{ $testimony->user->full_name }}</a>
+                                    <p class="text-xs text-gray-500">{{ $testimony->created_at->diffForHumans() }} ·
+                                        {!! $testimony->user->testimonial_Visibility == "1" ? '<i class="fas fa-globe-americas"></i>' : 'Visible only to you' !!}
+                                    </p>
+                                    </p>
                                 </div>
                             </div>
-                            <span>{{ $testimony->rating }}</span>
+                            <button class="text-gray-400 hover:text-gray-600">
+                                Class of {{ $testimony->user->graduation_year }}
+                            </button>
                         </div>
-                        <div>
-                            <span>{{ $testimony->user->job_title }}</span>
+
+                        <!-- Post Content -->
+                        <div class="px-4 pb-3">
+                            <p class="mb-3">{{ $testimony->content }}</p>
+                        </div>
+
+                        <!-- Post Stats -->
+                        <div class="px-4 py-2 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
+                            <div class="flex items-center space-x-2">
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-5 h-5 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </div>
+                                </div>
+                                <span>{{ $testimony->rating }}</span>
+                            </div>
+                            <div>
+                                <span>{{ $testimony->user->job_title }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Post Actions -->
+                        <div class="px-4 py-2 border-t border-gray-100 grid grid-cols-3">
+                            <button
+                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
+                                <i class="far fa-thumbs-up"></i>
+                                <span>Like</span>
+                            </button>
+                            <button
+                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
+                                <i class="far fa-thumbs-down"></i>
+                                <span>Dislike</span>
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Post Actions -->
-                    <div class="px-4 py-2 border-t border-gray-100 grid grid-cols-3">
-                        <button
-                            class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
-                            <i class="far fa-thumbs-up"></i>
-                            <span>Like</span>
-                        </button>
-                        <button
-                            class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
-                            <i class="far fa-thumbs-down"></i>
-                            <span>Dislike</span>
-                        </button>
-                    </div>
-                </div>
-
+                @endif
             @endforeach
 
 

@@ -25,9 +25,9 @@ return new class extends Migration {
             $table->string('email');
             $table->string('password');
             $table->string('profilePicture')->default("default.jpg");
-            $table->string('donation_Visibility')->default("public");
-            $table->string('testimonial_Visibility')->default("public");
-            $table->string('job_Visibility')->default("public");
+            $table->string('donation_Visibility')->default(1);
+            $table->string('testimonial_Visibility')->default(1);
+            $table->string('job_Visibility')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

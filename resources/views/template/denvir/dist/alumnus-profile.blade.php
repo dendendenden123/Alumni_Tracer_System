@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .progress-ring__circle {
             transition: stroke-dashoffset 0.5s;
@@ -243,10 +244,8 @@
             <div class="space-y-6">
                 <!-- Alumni Badges -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Privacy Setting</h3>
-                    </div>
-                    <form method="POST" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+                    <form method="POST" action="/privacy-settings"
+                        class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
                         @csrf
                         <div class="space-y-6">
                             <!-- Header -->
@@ -259,7 +258,7 @@
                                             d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                                     </svg>
                                 </div>
-                                <h2 class="text-xl font-bold text-gray-800">Profile Visibility Settings</h2>
+                                <h2 class="text-xl font-bold text-gray-800">Privacy Settings</h2>
                             </div>
 
                             <!-- Toggle Items -->
@@ -267,12 +266,12 @@
                                 <!-- Donation Visibility -->
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <h3 class="font-medium text-gray-700">Donation History</h3>
+                                        <h3 class="font-medium text-gray-700">Amount Donated</h3>
                                         <p class="text-sm text-gray-500">Who can see your donation records</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="donation_Visibility" value="1"
-                                            class="sr-only peer">
+                                        <input type="checkbox" name="donation_Visibility" value="1" class="sr-only peer"
+                                            {{ $alumnus->donation_Visibility == 1 ? 'checked' : '' }}>
                                         <div
                                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
                                         </div>
@@ -291,7 +290,7 @@
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" name="testimonial_Visibility" value="1"
-                                            class="sr-only peer">
+                                            class="sr-only peer" {{ $alumnus->testimonial_Visibility == 1 ? 'checked' : '' }}>
                                         <div
                                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
                                         </div>
@@ -309,7 +308,8 @@
                                         <p class="text-sm text-gray-500">Who can see your employment history</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input type="checkbox" name="job_Visibility'" value="1" class="sr-only peer">
+                                        <input type="checkbox" name="job_Visibility" value="1" class="sr-only peer"
+                                            {{ $alumnus->job_Visibility == 1 ? 'checked' : '' }}>
                                         <div
                                             class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600">
                                         </div>
@@ -323,6 +323,7 @@
 
                             <!-- Save Button -->
                             <div class="pt-4 border-t">
+                                <p class="setting-confirmation-message text-sm text-gray-500 mb-2"></p>
                                 <button type="submit" id="save-visibility-settings"
                                     class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200">
                                     Save Visibility Settings
@@ -521,8 +522,34 @@
         });
     }
 
-    $('#save-visibility-settings').on('click', function () {
-        alert('click.');
+    $('#save-visibility-settings').on('click', function (e) {
+        e.preventDefault();
+
+        //ajax syntax
+        var form = $(this).closest('form');
+        var formData = form.serialize();
+
+        $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: formData,
+            headers: {
+            'X-CSRF-TOKEN': form.find('input[name="_token"]').val(),
+            'Accept': 'application/json'
+            },
+            success: function(response) {
+            $('.setting-confirmation-message').text('Visibility settings updated successfully.');
+
+            setTimeout(function() {
+                $('.setting-confirmation-message').text('');
+            }, 3000);
+
+            },
+            error: function(xhr) {
+            $('.setting-confirmation-message').text('Failed to update visibility settings');
+            }
+        });
+
     });
 
 </script>

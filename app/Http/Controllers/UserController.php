@@ -12,6 +12,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $users = User::simplePaginate(10);
@@ -74,14 +75,20 @@ class UserController extends Controller
         return redirect("/alumnus/profle");
     }
 
-    public function privacySetting()
+    public function privacySetting(Request $request)
     {
+        if ($request->donation_Visibility == null) {
+            $request["donation_Visibility"] = "0";
+        }
+        if ($request->testimonial_Visibility == null) {
+            $request["testimonial_Visibility"] = "0";
+        }
+        if ($request->job_Visibility == null) {
+            $request["job_Visibility"] = "0";
+        }
         try {
-            User::where('id', auth()->user()->id)->update([
-                "donation_Visibility" => request('donation_Visibility'),
-                "testimonial_Visibility" => request('testimonial_Visibility'),
-                "job_Visibility" => request('job_Visibility'),
-            ]);
+            $data = $request->except('_token');
+            User::where('id', auth()->user()->id)->update($data);
             return response()->json(['success' => true, 'message' => '']);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e]);
