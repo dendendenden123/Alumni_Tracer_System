@@ -12,8 +12,8 @@ class DonationController extends Controller
     {
         try {
             $data = $request->all();
-            $this->uploadReceipt($request);
             $data['user_id'] = auth()->user()->id;
+            $data['payment_screenshot'] = $this->uploadReceipt($request);
             Donation::create($data);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
@@ -49,21 +49,25 @@ class DonationController extends Controller
             'payment_screenshot' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        // Rename the image by the time
-        $extension = $file->getClientOriginalExtension();
-        $timestamp = now()->format('Ymd_His');
-        $fileName = preg_replace('/\s+/', '_', "{$timestamp}.{$extension}");
+        //rename the file by the current timestamp      
+        $fileName = time() . '.' . $file->payment_screenshot->extension();
 
-        // Check first if the $fileName exists in the path, if so, replace the old one
-        $filePath = storage_path("app/public/images/{$fileName}");
-        if (file_exists($filePath)) {
-            unlink($filePath);
+        try {
+            // Store the uploaded file in storage/app/public/image/receipt
+            $path = $file->file('payment_screenshot')->storeAs(
+                'public/image/receipt',
+                $fileName
+            );
+
+            if (!$path) {
+                throw new \Exception('Failed to store the payment screenshot.');
+            }
+
+        } catch (\Exception $e) {
+            // Handle the exception if directory creation fails
+            throw new \Exception('Failed to upload the payment screenshot: ' . $e->getMessage());
         }
 
-        // Image save to app/public/images/
-        $file->storeAs('images', $fileName, 'public');
-
-        // Optionally, return the file name or path if needed
         return $fileName;
     }
 }

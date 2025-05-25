@@ -154,7 +154,7 @@
                                                         @csrf
 
                                                         <td>
-                                                            <img src="https://via.placeholder.com/150?text=Receipt+1"
+                                                            <img src="{{ asset('storage/image/receipt/' . $donation->payment_screenshot) }}"
                                                                 class="donation-img" data-bs-toggle="modal"
                                                                 data-bs-target="#receiptModal"
                                                                 data-bs-img="https://via.placeholder.com/600?text=Receipt+1">
