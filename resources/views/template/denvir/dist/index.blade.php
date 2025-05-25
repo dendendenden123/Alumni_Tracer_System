@@ -392,10 +392,9 @@
             <div class="page-heading">
                 <h3>ALUMNI TRACER | Admin Dashboard</h3>
                 <a href="officer-create" class="btn btn-primary">Assign New Alumni Officer</a>
-                <form action="logout" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Log Out</a>
-                </form>
+
+                <a href="logout" class="btn btn-danger">Log Out</a>
+
             </div>
             <div class="page-content">
                 <section class="row">
