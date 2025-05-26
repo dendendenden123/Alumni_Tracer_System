@@ -268,9 +268,9 @@
 
             <div class="logo">Alumni Tracer System</div>
             <div class="user-info">
-                <a href="/officer" class="dashboard-link"
+                <a href="javascript:history.back()" class="dashboard-link"
                     style="color: #fff; text-decoration: none; font-size: 16px; margin-right: 20px;">
-                    <i class="fas fa-tachometer-alt" style="margin-right: 6px;"></i> Dashboard
+                    <i class="fas fa-arrow-left" style="margin-right: 6px;"></i> Back
                 </a>
                 <span>{{ auth()->user()->full_name }}</span>
                 <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile Picture"
@@ -313,13 +313,13 @@
                         </div>
                         <div>
                             <span class="status-badge 
-                                        @if($testimony->is_Approved == "true") 
-                                            status-approved
-                                        @elseif($testimony->is_Approved == "false") 
-                                            status-pending
-                                        @else 
-                                            status-rejected
-                                        @endif " id="{{ $testimony->id }}">
+                                            @if($testimony->is_Approved == "true") 
+                                                status-approved
+                                            @elseif($testimony->is_Approved == "false") 
+                                                status-pending
+                                            @else 
+                                                status-rejected
+                                            @endif " id="{{ $testimony->id }}">
 
                                 @if($testimony->is_Approved == "true")
                                     Approved

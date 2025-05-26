@@ -13,50 +13,6 @@
 
 <body class="bg-gray-50 font-sans">
     <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <div class="hidden md:flex md:w-64 lg:w-80 bg-white border-r border-gray-200 flex-col">
-            <div class="p-4">
-                <h1 class="text-2xl font-bold text-indigo-600">Alumni Tracer</h1>
-            </div>
-            <nav class="flex-1 px-2 space-y-2">
-                <a href="#"
-                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
-                    <i class="fas fa-home mr-3"></i>
-                    <span>Home</span>
-                </a>
-                <a href="#"
-                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
-                    <i class="fas fa-user-friends mr-3"></i>
-                    <span>Friends</span>
-                </a>
-                <a href="#"
-                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
-                    <i class="fas fa-bell mr-3"></i>
-                    <span>Notifications</span>
-                </a>
-                <a href="#"
-                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
-                    <i class="fas fa-envelope mr-3"></i>
-                    <span>Messages</span>
-                </a>
-                <a href="logout"
-                    class="flex items-center p-3 rounded-lg hover:bg-gray-100 text-gray-700 hover:text-indigo-600">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    <span>Log Out</span>
-                </a>
-            </nav>
-            <div class="p-4 border-t border-gray-200">
-                <div class="flex items-center">
-                    <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
-                        class="w-10 h-10 rounded-full">
-                    <div class="ml-3">
-                        <p class="font-medium">Sarah Johnson</p>
-                        <p class="text-sm text-gray-500">@sarahj</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Header -->
