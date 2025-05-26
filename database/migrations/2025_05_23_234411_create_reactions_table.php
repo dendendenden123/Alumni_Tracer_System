@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('reaction_type'); // e.g., 'like', 'love', 'laugh', etc.
-            $table->foreignId('user_reacted')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('testimony_id');
             $table->timestamps();
         });
     }

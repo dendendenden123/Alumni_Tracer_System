@@ -13,13 +13,7 @@ return new class extends Migration {
         Schema::create('job_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('position');
-            $table->string('company');
-            $table->string('description');
-            $table->string('start_month');
-            $table->string('end_month');
-            $table->string('start_year');
-            $table->string('end_year');
+            $table->longText('encrypted_payload')->comment('Encrypted job history data');
             $table->timestamps();
         });
     }

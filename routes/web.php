@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AlumnusController;
 use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\ReactionController;
 
 
 
@@ -79,6 +80,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/alumni-officer/Manage_donation', 'index');
         Route::post('/alumni-officer/update_donation/{id}', 'update');
         Route::get('/alumni-officer/export_donation', "exportDonation_pdf");
+    });
+
+    //ReactionController routes
+    Route::controller(ReactionController::class)->group(function () {
+        Route::get('/reaction', 'store');
     });
 
     // Dynamic view route

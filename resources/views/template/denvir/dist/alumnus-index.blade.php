@@ -89,6 +89,12 @@
             <!-- Post 1 -->
 
             @foreach ($testimonies as $testimony)
+                @if($testimonies->where('is_Approved', 'true')->count() == 0)
+                    <div class="bg-white rounded-xl shadow-sm p-4 text-center">
+                        <p class="text-gray-500">No testimonies yet. Go ahead and post the first one!</p>
+                    </div>
+                    @break
+                @endif
 
                 @if (($testimony->user->id == auth()->user()->id || $testimony->user->testimonial_Visibility == "1") && $testimony->is_Approved == "true")
                     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -118,78 +124,37 @@
 
                         <!-- Post Stats -->
                         <div class="px-4 py-2 border-t border-gray-100 flex items-center justify-between text-sm text-gray-500">
-                            <div class="flex items-center space-x-2">
-                                <div class="flex items-center">
-                                    <div
-                                        class="w-5 h-5 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </div>
-                                </div>
-                                <span>{{ $testimony->rating }}</span>
-                            </div>
+                            <!-- <div class="flex items-center space-x-2">
+                                                                                                                                        <div class="flex items-center">
+                                                                                                                                            <div
+                                                                                                                                                class="w-5 h-5 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs">
+                                                                                                                                                <i class="fas fa-thumbs-up"></i>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                        <span>{{ $reaction->where("testimony_id", $testimony->id)->where("reaction_type", "like")->count() }}</span>
+                                                                                                                                    </div> -->
                             <div>
-                                <span>{{ $testimony->user->job_title }}</span>
+                                <span>{{ $testimony->user->degree }}</span>
                             </div>
                         </div>
 
                         <!-- Post Actions -->
-                        <div class="px-4 py-2 border-t border-gray-100 grid grid-cols-3">
-                            <button
-                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
-                                <i class="far fa-thumbs-up"></i>
-                                <span>Like</span>
-                            </button>
-                            <button
-                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500">
-                                <i class="far fa-thumbs-down"></i>
-                                <span>Dislike</span>
-                            </button>
-                        </div>
+                        <!-- <form method="get" action="/reaction" class="px-4 py-2 border-t border-gray-100 grid grid-cols-3 gap-2">
+                                                                                                                            <input type="hidden" name="testimony_id" value="{{ $testimony->id }}">
+                                                                                                                            <button type="submit" name="reaction" value="like"
+                                                                                                                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500 w-full">
+                                                                                                                                <i class="far fa-thumbs-up"></i>
+                                                                                                                                <span>Like</span>
+                                                                                                                            </button>
+                                                                                                                            <button type="submit" name="reaction" value="dislike"
+                                                                                                                                class="flex items-center justify-center space-x-2 py-2 rounded-lg hover:bg-gray-50 text-gray-500 w-full">
+                                                                                                                                <i class="far fa-thumbs-down"></i>
+                                                                                                                                <span>Dislike</span>
+                                                                                                                            </button>
+                                                                                                                        </form> -->
                     </div>
                 @endif
             @endforeach
-
-
-            <!-- Post 2 -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <!-- Post Header -->
-                <div class="p-4 flex items-center justify-between">
-                    <div class="flex items-center space-x-3">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Profile"
-                            class="w-10 h-10 rounded-full">
-                        <div>
-                            <p class="font-medium">Jessica Park</p>
-                            <p class="text-xs text-gray-500">Yesterday at 4:20 PM · <i class="fas fa-user-friends"></i>
-                            </p>
-                        </div>
-                    </div>
-                    <button class="text-gray-400 hover:text-gray-600">
-                        <i class="fas fa-ellipsis-h"></i>
-                    </button>
-                </div>
-
-                <!-- Post Content -->
-                <div class="px-4 pb-3">
-                    <p class="mb-3">Our team just launched version 3.0 of our product! 🚀 So proud of everyone
-                        who contributed to this milestone. Check it out and let us know what you think!</p>
-                    <div class="border border-gray-200 rounded-lg p-3 bg-gray-50">
-                        <div class="flex">
-                            <div
-                                class="w-16 h-16 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center text-white">
-                                <i class="fas fa-box-open text-2xl"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="font-medium">Product Name 3.0</p>
-                                <p class="text-sm text-gray-500">productwebsite.com</p>
-                                <p class="text-sm mt-1">The latest version of our product with new features and
-                                    improvements.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Post Stats and Actions (same as above) -->
-            </div>
         </div>
         </main>
     </div>
