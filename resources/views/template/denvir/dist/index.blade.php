@@ -244,10 +244,10 @@
                                                     <td>
                                                         <span
                                                             class="user-role 
-                                                                                                                                                                                                                                                                          @if($user->role == "Admin") role-admin
-                                                                                                                                                                                                                                                                          @elseif($user->role == "Officer") role-officer
-                                                                                                                                                                                                                                                                              @else role-alumnus 
-                                                                                                                                                                                                                                                                         @endif">
+                                                                                                                                                                                                                                                                                              @if($user->role == "Admin") role-admin
+                                                                                                                                                                                                                                                                                              @elseif($user->role == "Officer") role-officer
+                                                                                                                                                                                                                                                                                                  @else role-alumnus 
+                                                                                                                                                                                                                                                                                             @endif">
                                                             @if($user->role == "Admin") Admin
                                                             @elseif($user->role == "Officer") Alumni Officer
                                                                 @else Alumnus
@@ -267,8 +267,9 @@
                                                             method="POST" style="display: inline;">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                                title="Delete User">
-                                                                <i class="fas fa-trash"></i>
+                                                                title="Delete User"
+                                                                @if($user->id == auth()->user()->id) disabled @endif>
+                                                                <i class="fas fa-trash" ></i>
                                                             </button>
                                                         </form>
                                                     </td>

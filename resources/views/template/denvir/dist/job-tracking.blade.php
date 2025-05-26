@@ -325,19 +325,21 @@
 
                                                     @endswitch
                                                     </span></td>
-                                                    <td>{{$user->updated_at }}</td>
+                                                    <td>{{$user->updated_at->format("M d Y") }}</td>
                                                     <td>
-                                                        <a href="/user/edit/{{ $user->id }}">
+                                                        
                                                         <button class="btn btn-sm btn-outline-success action-btn"
-                                                            title="Edit">
+                                                            title="Edit" @if($user->role == "Admin" && auth()->user()->role != "Admin") disabled @endif>
+                                                            <a href="/user/edit/{{ $user->id }}">
                                                             <i class="fas fa-edit"></i>
+                                                            </a>
                                                         </button>
-                                                        </a>
+
                                                         <form action="user/delete/{{ $user->id }}" class="delete-form"
                                                             method="POST" style="display: inline;">
                                                             @csrf
                                                         <button type="submit" class="btn btn-sm btn-outline-danger action-btn"
-                                                            title="Delete">
+                                                            title="Delete" @if($user->id == auth()->user()->id || $user->role == "Admin") disabled @endif>
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                         </form>

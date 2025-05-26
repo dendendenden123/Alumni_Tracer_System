@@ -27,9 +27,6 @@
                 <nav class="hidden md:flex space-x-6">
                     <a href="/alumnus" class="text-gray-700 hover:text-indigo-600">Testimonies</a>
                     <a href="/donate" class="text-gray-700 hover:text-indigo-600">Donate</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">Network</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">Jobs</a>
-                    <a href="#" class="text-gray-700 hover:text-indigo-600">Events</a>
                     <a href="/logout" class="text-gray-700 hover:text-indigo-600">Log out</a>
                 </nav>
             </div>
@@ -49,10 +46,6 @@
         <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
             <!-- Cover Photo -->
             <div class="h-48 bg-gradient-to-r from-indigo-500 to-purple-600 relative">
-                <button
-                    class="absolute top-4 right-4 bg-white/90 text-gray-700 px-3 py-1 rounded-full text-sm flex items-center">
-                    <i class="fas fa-camera mr-2"></i> Edit Cover
-                </button>
             </div>
 
             <!-- Profile Info -->
@@ -79,14 +72,6 @@
                                 {{ auth()->user()->degree }}
                             </p>
                         </div>
-                    </div>
-                    <div class="flex space-x-3 mt-4 md:mt-0">
-                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg flex items-center">
-                            <i class="fas fa-user-plus mr-2"></i> Connect
-                        </button>
-                        <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg flex items-center">
-                            <i class="fas fa-envelope mr-2"></i> Message
-                        </button>
                     </div>
                 </div>
 
@@ -124,7 +109,7 @@
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold">About</h3>
                         <button class="text-indigo-600 hover:text-indigo-800">
-                            <i class="fas fa-pencil-alt"></i>
+                            <a href="/user/edit/{{ auth()->user()->id }}"> <i class="fas fa-pencil-alt"></i></a>
                         </button>
                     </div>
                     <div class="space-y-4">
@@ -137,8 +122,12 @@
                                 open source projects.
                             </p>
                         </div>
+                           <div>
+                            <p class="text-sm text-gray-500">Job Status</p>
+                            <p class="mt-1 font-medium">{{ auth()->user()->status }}</p>
+                        </div>
                         <div>
-                            <p class="text-sm text-gray-500">Current Position</p>
+                            <p class="text-sm text-gray-500">Position</p>
                             <p class="mt-1 font-medium">{{ auth()->user()->job_title }}</p>
                         </div>
                         <div>
@@ -163,32 +152,6 @@
                 <div>
 
                 </div>
-
-                <!-- Education -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold">Education</h3>
-                        <button class="text-indigo-600 hover:text-indigo-800">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    <div class="space-y-4">
-                        <div class="flex">
-                            <div class="mr-4">
-                                <div
-                                    class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium">University of Technology</p>
-                                <p class="text-sm text-gray-500">Bachelor of Science in Computer Science</p>
-                                <p class="text-sm text-gray-500">2011 - 2015</p>
-                                <p class="text-sm text-gray-500">GPA: 3.8/4.0</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Middle Column -->
@@ -204,6 +167,10 @@
                     <div class="space-y-6">
 
                         @foreach ($alumnus->jobHistory as $job)
+                        @php
+                            $decryptJob = json_decode(decrypt($job->encrypted_payload), true);
+                        @endphp
+
                             <div class="flex">
                                 <div class="mr-4">
                                     <div
@@ -212,12 +179,12 @@
                                     </div>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="font-medium">{{ $job->position }}</p>
-                                    <p class="text-sm text-gray-500">{{ $job->company }}</p>
-                                    <p class="text-sm text-gray-500">{{ $job->start_month }} {{ $job->start_year }} -
-                                        {{ $job->end_month }} {{ $job->end_year }}
+                                    <p class="font-medium">{{ $decryptJob['position'] ?? '' }}</p>
+                                    <p class="text-sm text-gray-500">{{ $decryptJob['company'] ?? '' }}</p>
+                                    <p class="text-sm text-gray-500">{{ $decryptJob['start_month'] ?? '' }} {{ $decryptJob['start_year'] ?? '' }} -
+                                        {{ $decryptJob['end_month'] ?? '' }} {{ $decryptJob['end_year'] ?? '' }}
                                     </p>
-                                    <p class="text-sm mt-2">{{ $job->description }}</p>
+                                    <p class="text-sm mt-2">{{ $decryptJob['description'] ?? '' }}</p>
                                 </div>
                             </div>
                         @endforeach
