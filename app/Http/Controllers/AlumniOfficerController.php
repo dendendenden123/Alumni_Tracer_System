@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\JobHistory;
+use App\Models\Testimony;
+use App\Models\donation;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -12,10 +15,14 @@ use App\Mail\OfficerCredential;
 class AlumniOfficerController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
+        $users = User::with(["jobHistory", "testimony", "donation"])->get();
+        $donation = donation::all();
+        $jobHistory = JobHistory::all();
+        $testimonies = Testimony::with("user")->get();
+        return view('template.denvir.dist.alumni-officer', compact('users', 'donation', 'jobHistory', 'testimonies'));
 
-        return view('template.denvir.dist.alumni-officer');
-        
     }
     public function store(Request $request)
     {

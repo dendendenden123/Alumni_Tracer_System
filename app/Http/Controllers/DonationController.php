@@ -54,9 +54,14 @@ class DonationController extends Controller
 
         try {
             // Store the uploaded file in storage/app/public/image/receipt
+            $directory = storage_path('receipt');
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
             $path = $file->file('payment_screenshot')->storeAs(
-                'public/image/receipt',
-                $fileName
+                'receipt',
+                $fileName,
+                "public"
             );
 
             if (!$path) {

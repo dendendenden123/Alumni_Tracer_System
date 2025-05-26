@@ -61,8 +61,10 @@ Route::middleware(['auth'])->group(function () {
 
     //TestimonyController routes
     Route::controller(TestimonyController::class)->group(function () {
-        Route::get('alumnus', 'index');
-        Route::post('testimony/store', 'store');
+        Route::get('/testimony', 'index');
+        Route::post('/testimony/store', 'store');
+        Route::post('/testimony/update/{testimony_id}', 'update');
+        Route::post('/testimony/update/all', 'update_All');
     });
 
     //JobHistoryController routes

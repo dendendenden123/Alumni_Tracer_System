@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Testimony;
+
 
 class AlumnusController extends Controller
 {
     public function index()
     {
-        return view('template.denvir.dist.alumnus-index');
+        $testimonies = Testimony::with('user')->orderByDesc('created_at')->get();
+        return view('template.denvir.dist.alumnus-index', compact('testimonies'));
     }
 
     public function show()

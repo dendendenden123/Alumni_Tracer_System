@@ -15,17 +15,11 @@ class TestimonyController extends Controller
      */
     public function index()
     {
-        $testimonies = Testimony::with('user')->orderByDesc('created_at')->get();
-        return view('template\denvir\dist\alumnus-index', compact('testimonies'));
+        $testimonies = Testimony::with('user')->orderByDesc('created_at')->paginate(5);
+        return view('template\denvir\dist\alumni-officer-testimony', compact('testimonies'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -46,34 +40,45 @@ class TestimonyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Testimony $testimony)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Testimony $testimony)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTestimonyRequest $request, Testimony $testimony)
+    public function update(Request $request, $testimony_id)
     {
-        //
+        try {
+            $testimony = Testimony::findOrFail($testimony_id);
+
+            $testimony->update($request->all());
+
+            return response()->json([
+                "success" => true,
+                "message" => "Testimony updated successfully.",
+                "testimony" => $testimony
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Failed to update testimony.",
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Testimony $testimony)
+
+    public function update_All(Request $request)
     {
-        //
+        try {
+            Testimony::update($request->all());
+
+            return response()->json([
+                "success" => true,
+                "message" => "Testimony updated successfully.",
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                "success" => false,
+                "message" => "Failed to update testimony.",
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

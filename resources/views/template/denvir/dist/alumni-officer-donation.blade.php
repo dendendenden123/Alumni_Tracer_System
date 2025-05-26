@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         :root {
             --primary: #2c3e50;
@@ -86,14 +87,6 @@
                         <a href="/officer" class="btn btn-outline-secondary me-2">
                             <i class="fas fa-home me-1"></i> Dashboard
                         </a>
-                        <div class="btn-group me-2">
-                            <button class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-download me-1"></i> Export
-                            </button>
-                            <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-plus me-1"></i> New Donation
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -154,10 +147,10 @@
                                                         @csrf
 
                                                         <td>
-                                                            <img src="{{ asset('storage/image/receipt/' . $donation->payment_screenshot) }}"
+                                                            <img src="{{ asset('storage/receipt/' . $donation->payment_screenshot) }}"
                                                                 class="donation-img" data-bs-toggle="modal"
                                                                 data-bs-target="#receiptModal"
-                                                                data-bs-img="https://via.placeholder.com/600?text=Receipt+1">
+                                                                data-bs-img="{{ asset('storage/receipt/' . $donation->payment_screenshot) }}">
                                                         </td>
                                                         <td>
                                                             <strong>{{ $donation->user->full_name  }}</strong><br>
@@ -220,10 +213,10 @@
 
                                                 <tr>
                                                     <td>
-                                                        <img src="https://via.placeholder.com/150?text=Receipt+3"
+                                                        <img src="{{ asset('storage/receipt/' . $donation->payment_screenshot) }}"
                                                             class="donation-img" data-bs-toggle="modal"
                                                             data-bs-target="#receiptModal"
-                                                            data-bs-img="https://via.placeholder.com/600?text=Receipt+3">
+                                                            data-bs-img="{{ asset('storage/receipt/' . $donation->payment_screenshot) }}">
                                                     </td>
                                                     <td>
                                                         <strong>{{ $donation->user->full_name }}</strong><br>
@@ -315,9 +308,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">
-                        <i class="fas fa-download me-1"></i> Download
-                    </button>
                 </div>
             </div>
         </div>
@@ -327,5 +317,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+<script>
+$(document).ready(function() {
+    // Handle receipt image click to show in modal
+    $('.donation-img').on('click', function() {
+        var imgSrc = $(this).data('bs-img');
+        $('#receiptPreview').attr('src', imgSrc);
+    });
+});
+</script>
+
+
 
 </html>
