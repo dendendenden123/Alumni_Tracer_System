@@ -105,6 +105,20 @@
                             </div>
                         </div>
 
+                        <!-- status -->
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <select name="status" class="form-control form-control-xl" required>
+                                <option value="" disabled selected>Status</option>
+                                <option value="employed">Employed</option>
+                                <option value="seeking">Seeking</option>
+                                <option value="promoted">Promoted</option>
+                            </select>
+                            <div class="form-control-icon">
+                                <i class="bi bi-calendar"></i>
+                            </div>
+                        </div>
+
+
                         <!-- Username -->
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" name="username" class="form-control form-control-xl"

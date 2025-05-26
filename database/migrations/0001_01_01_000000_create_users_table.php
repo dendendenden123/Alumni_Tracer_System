@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->string('donation_Visibility')->default(1);
             $table->string('testimonial_Visibility')->default(1);
             $table->string('job_Visibility')->default(1);
+            $table->string('status')->default('employed');
             $table->rememberToken();
             $table->timestamps();
         });

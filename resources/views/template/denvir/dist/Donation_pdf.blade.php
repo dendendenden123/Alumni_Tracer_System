@@ -102,40 +102,34 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>User ID</th>
-                <th>Amount</th>
+                <th>Donor Name</th>
+                <th>Occupation</th>
+                <th>Amount(PHP)</th>
                 <th>Payment Method</th>
                 <th>Purpose</th>
-                <th>Status</th>
                 <th>Date</th>
             </tr>
         </thead>
         <tbody>
             <!-- Sample data - replace with PHP loop in actual implementation -->
-            <tr>
-                <td>1</td>
-                <td>42</td>
-                <td class="amount">$100.00</td>
-                <td>Credit Card</td>
-                <td>General Donation</td>
-                <td><span class="status verified">Verified</span></td>
-                <td>2023-10-15</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>78</td>
-                <td class="amount">$50.00</td>
-                <td>PayPal</td>
-                <td>Event Sponsorship</td>
-                <td><span class="status unverified">Pending</span></td>
-                <td>2023-10-16</td>
-            </tr>
-            <!-- Add more rows dynamically from your database -->
+            @foreach ($donations as $donation)
+                <tr>
+                    <td>{{ $donation->id }}</td>
+                    <td>{{ $donation->user->full_name }}</td>
+                    <td>{{ $donation->user->job_title }}</td>
+                    <td class="amount">
+                        {{ number_format($donation->amount, 2) }}
+                    </td>
+                    <td>{{ $donation->payment_method }}</td>
+                    <td>{{ $donation->purpose }}</td>
+                    <td>{{ $donation->updated_at->format("M d Y")}}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
     <div class="footer">
-        <p>Total Records: 2 | Total Amount: $150.00</p>
+        <p>Total Records: {{ $donations->count() }} | Total Amount: Php {{ $donations->sum("amount") }}</p>
     </div>
 </body>
 

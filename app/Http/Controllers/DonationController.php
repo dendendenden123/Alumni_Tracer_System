@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Donation;
-use function PHPUnit\Framework\directoryExists;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class DonationController extends Controller
 {
@@ -74,5 +74,12 @@ class DonationController extends Controller
         }
 
         return $fileName;
+    }
+
+    public function exportDonation_pdf()
+    {
+        $donations = Donation::with('user')->get();
+        $pdf = PDF::loadView('template.denvir.dist.Donation_pdf', compact("donations"));
+        return $pdf->download('donation-records-' . now()->format('Y-m-d') . '.pdf');
     }
 }

@@ -127,21 +127,12 @@
                         <small class="text-white-50">Officer Dashboard</small>
                     </div>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-users"></i> Alumni Management
-                            </a>
-                        </li>
-                        <li class="nav-item">
+
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="fas fa-briefcase"></i> Job Tracking
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="/testimony">
                                 <i class="fas fa-comment"></i> Testimonials
@@ -152,9 +143,9 @@
                                 <i class="fas fa-donate"></i> Donations
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog"></i> Settings
+                         <li class="nav-item">
+                            <a class="nav-link" href="/job-tracking">
+                                <i class="fas fa-briefcase"></i> Job Tracking
                             </a>
                         </li>
                         <li class="nav-item">
@@ -256,7 +247,7 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-sm btn-outline-primary mt-3">
-                                    <i class="fas fa-download me-1"></i> Export Report
+                                   <a href="/alumni-officer/export_donation" ><i class="fas fa-download me-1"></i> Export Report</a>
                                 </button>
                             </div>
                         </div>

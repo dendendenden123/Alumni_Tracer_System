@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Donation;
+use App\Models\Testimony;
 
 class UserController extends Controller
 {
@@ -15,10 +17,11 @@ class UserController extends Controller
 
     public function index()
     {
+        $donations = Donation::with('user')->get();
+        $testomonies = Testimony::with('user')->get();
         $users = User::simplePaginate(10);
-        $authUser = auth()->id();//Logged in user
 
-        return view('template.denvir.dist.index', compact('users', 'authUser'));
+        return view('template.denvir.dist.index', compact('users', 'donations', 'testomonies'));
 
     }
 

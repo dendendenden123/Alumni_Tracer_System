@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
     //JobHistoryController routes
     Route::controller(JobHistoryController::class)->group(function () {
+        Route::get('/job-tracking', 'index');
         Route::post('/jobHistory-store', 'store');
     });
 
@@ -77,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/donation-store', 'store');
         Route::get('/alumni-officer/Manage_donation', 'index');
         Route::post('/alumni-officer/update_donation/{id}', 'update');
+        Route::get('/alumni-officer/export_donation', "exportDonation_pdf");
     });
 
     // Dynamic view route
