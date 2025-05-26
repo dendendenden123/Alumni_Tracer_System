@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Alumni Tracer System - Officer Dashboard</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <style>
         :root {
             --primary: #2c3e50;
@@ -140,7 +143,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/testimony">
                                 <i class="fas fa-comment"></i> Testimonials
                             </a>
                         </li>
@@ -190,7 +193,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <h6 class="card-title">Total Alumni</h6>
-                                        <h2 class="mb-0">1,240</h2>
+                                        <h2 class="mb-0">{{ $users->count() }}</h2>
                                     </div>
                                     <div class="icon">
                                         <i class="fas fa-users"></i>
@@ -200,68 +203,57 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card stat-card card-success">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="card-title">Active Job Postings</h6>
-                                        <h2 class="mb-0">28</h2>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-briefcase"></i>
+                        <a href="/testimony" class="text-reset text-decoration-none">
+                            <div class="card stat-card card-success">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">Approved testimonies</h6>
+                                            <h2 class="mb-0">{{ $testimonies->where("is_Approved", "true")->count() }}
+                                            </h2>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fas fa-briefcase"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col-md-4">
-                        <div class="card stat-card card-warning">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h6 class="card-title">Donations</h6>
-                                        <h2 class="mb-0">$5,200</h2>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fas fa-donate"></i>
+                        <a href="/alumni-officer/Manage_donation" class="text-reset text-decoration-none">
+                            <div class="card stat-card card-warning">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title">Donations</h6>
+                                            <h2 class="mb-0">₱{{ number_format($donation->sum("amount"), 2) }}</h2>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="fas fa-donate"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
                 <div class="row">
-                    <!-- Alumni Privacy Toggle -->
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Privacy Controls</h5>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="privacyToggle" checked>
-                                    <label class="form-check-label" for="privacyToggle">Enable Privacy</label>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <p class="text-muted">When enabled, contact details are hidden from public view.</p>
-                                <span class="badge bg-success privacy-badge">
-                                    <i class="fas fa-lock me-1"></i> Currently Active
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Donation Progress -->
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-12 mb-4">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0">Annual Donation Progress</h5>
+                                <h5 class="mb-0">Alumni Donation Rate</h5>
                             </div>
                             <div class="card-body">
-                                <h4>$5,200 of $20,000</h4>
+                                <h4>{{ $donation->unique('user_id')->count() }} of {{ $users->count() }}</h4>
                                 <div class="progress mt-2">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 26%;"
-                                        aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        style="width: {{ ($donation->unique('user_id')->count() / ($users->count())) * 100 }}%;"
+                                        aria-valuenow="26" aria-valuemin="0" aria-valuemax="100">
+                                        {{ ($donation->unique('user_id')->count() / ($users->count())) * 100 }}%
+                                    </div>
                                 </div>
                                 <button class="btn btn-sm btn-outline-primary mt-3">
                                     <i class="fas fa-download me-1"></i> Export Report
@@ -279,23 +271,24 @@
                                 <h5 class="mb-0">Recent Activity</h5>
                             </div>
                             <div class="card-body">
-                                <div class="activity-item">
-                                    <h6>New Testimonial Submission</h6>
-                                    <p class="text-muted small">John Doe (BS Computer Science 2020)</p>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-success">Approve</button>
-                                        <button class="btn btn-outline-danger">Reject</button>
+                                @foreach ($testimonies->sortByDesc("updated_at") as $testimony)
+                                    <div class="activity-item">
+                                        <h6>{{$testimony->user->full_name}}</h6>
+
+                                              @if ($testimony->is_Approved == "false")
+                                           <p class="text-muted small">Posted new Testimony </p> 
+                                        @elseif ($testimony->is_Approved == "true")
+                                            <p class="text-muted small">The testimony  have been
+                                                <strong>approved! ✅</strong> </p>
+                                                @else
+                                                 <p class="text-muted small">The testimony have been
+                                            <strong>rejected. ❌</strong>
+                                        </p>
+                                        @endif
+
+
                                     </div>
-                                </div>
-                                <div class="activity-item">
-                                    <h6>Job Status Updated</h6>
-                                    <p class="text-muted small">Jane Smith is now at <strong>Google</strong> as Senior
-                                        Developer</p>
-                                </div>
-                                <div class="activity-item">
-                                    <h6>New Donation Received</h6>
-                                    <p class="text-muted small">$500 from Michael Johnson</p>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -314,29 +307,28 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Degree</th>
-                                                <th>Status</th>
+                                                <th>Role</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Maria Garcia</td>
-                                                <td>BS Nursing</td>
-                                                <td><span class="badge bg-success">Employed</span></td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="encrypted-field">Robert Chen</td>
-                                                <td>BS Computer Science</td>
-                                                <td><span class="badge bg-warning text-dark">Job Hunting</span></td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sarah Johnson</td>
-                                                <td>MBA</td>
-                                                <td><span class="badge bg-info">Promoted</span></td>
-                                                <td><button class="btn btn-sm btn-outline-secondary">View</button></td>
-                                            </tr>
+                                            @foreach ($users as $user)
+                                                <tr>
+                                                    <td>{{ $user->full_name }}</td>
+                                                    <td>{{ $user->degree }}</td>
+                                                    <td>
+                                                        @if ($user->role == 'Admin')
+                                                            <span class="badge bg-success">Admin</span>
+                                                        @elseif ($user->role == 'Officer')
+                                                            <span class="badge bg-warning text-dark">Officer</span>
+                                                        @elseif ($user->role == 'Alumnus')
+                                                            <span class="badge bg-info">Alumnus</span>
+                                                        @endif
+                                                    <td><a href="/profile/{{ $user->id }}"><button
+                                                                class="btn btn-sm btn-outline-secondary">View</button></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -364,6 +356,25 @@
                 badge.innerHTML = '<i class="fas fa-unlock me-1"></i> Privacy Disabled';
             }
         });
+        $("#privacyToggle").on("click", function (e) {
+            $.ajax({
+                url: '/testimony/update/all',
+                type: 'POST',
+                data: $("#update_all").serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // handle success
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // handle error
+                    console.error(error);
+                }
+            });
+        });
+
     </script>
 </body>
 

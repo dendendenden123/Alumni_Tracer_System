@@ -76,7 +76,7 @@
                         <!-- QR Code -->
                         <div
                             class="border-4 border-blue-100 p-4 rounded-lg mx-auto w-48 h-48 flex items-center justify-center">
-                            <img src="{{ asset('storage/images/gcash.jpg')}}" alt="GCash QR Code">
+                            <img src="{{ asset('storage/images/QR_code.jpg')}}" alt="GCash QR Code">
                         </div>
 
                         <div class="flex items-start">

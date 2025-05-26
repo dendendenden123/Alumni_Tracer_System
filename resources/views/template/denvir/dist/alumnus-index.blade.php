@@ -7,6 +7,8 @@
     <title>Modern Newsfeed</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="bg-gray-50 font-sans">
@@ -87,7 +89,7 @@
             <!-- Newsfeed Content -->
             <main class="flex-1 overflow-y-auto p-4 md:p-6">
                 <!-- Create Post -->
-                <form method="post" action="testimony/store">
+                <form method="post" action="testimony/store" id="postForm">
                     <div class="bg-white rounded-xl shadow-sm p-4 mb-6">
                         <div class="flex items-center space-x-3 mb-4">
                             <img src="{{ asset('storage/images/' . auth()->user()->profilePicture) }}" alt="Profile"
@@ -96,9 +98,15 @@
                             @csrf
                             <input type="text" placeholder="Post a testimony..." name="testimony"
                                 class="flex-1 bg-gray-100 rounded-full py-2 px-4 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:bg-white">
-                            <button type="submit"
+
+                            <button type="submit" id="publishButton"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Publish</button>
+                        </div>
+                        <div id="underReview"
+                            class="text-sm text-yellow-600 bg-yellow-100 px-3 py-1 rounded-full font-medium flex items-center space-x-2 hidden">
+                            <i class="fas fa-hourglass-half mr-2"></i>
+                            <span>Your testimony is under review for approval.</span>
                         </div>
                 </form>
                 <div class="flex justify-between border-t border-gray-100 pt-3">
@@ -126,7 +134,7 @@
 
             @foreach ($testimonies as $testimony)
 
-                @if ($testimony->user->id == auth()->user()->id || $testimony->user->testimonial_Visibility == "1")
+                @if (($testimony->user->id == auth()->user()->id || $testimony->user->testimonial_Visibility == "1") && $testimony->is_Approved == "true")
                     <div class="bg-white rounded-xl shadow-sm overflow-hidden">
                         <!-- Post Header -->
                         <div class="p-4 flex items-center justify-between">
@@ -231,5 +239,18 @@
     </div>
     </div>
 </body>
+<script>
+    // Example script to handle the "under review" message
+    $(document).ready(function () {
+        // show review message when publish button is clicked
+        $("#publishButton").on("click", function (event) {
+            event.preventDefault(); // Prevent form submission
+            $('#underReview').removeClass('hidden');
+            setTimeout(function () {
+                $("#postForm").submit()
+            }, 3000);
+        });
+    });
+</script>
 
 </html>
