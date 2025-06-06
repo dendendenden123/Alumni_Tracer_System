@@ -79,7 +79,7 @@
                 <div class="mt-6 pt-6 border-t border-gray-100 grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="text-center">
                         <p class="text-2xl font-bold text-indigo-600">
-                            {{  $alumnus->donation->where('is_Verify', "true")->sum('amount')}}
+                            ₱{{  $alumnus->donation->where('is_Verify', "true")->sum('amount')}}
                         </p>
                         <p class="text-sm text-gray-500">Total amount donated</p>
                     </div>
